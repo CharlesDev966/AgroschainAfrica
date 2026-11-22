@@ -1,0 +1,26 @@
+:root{--ink:#12372A;--ink-2:#4F6258;--green:#1F8A4C;--green-2:#3DBE74;--amber:#F2A900;--bg:#F6FAF7;--card:#fff;--line:#DCE8DF;--dark:#0E2A1F}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Sora',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+.bar{background:var(--dark);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bar a{color:#fff;text-decoration:none;font-weight:700;letter-spacing:-.02em}.bar b{color:var(--green-2)}
+.bar .back{font-size:.85rem;font-weight:500;color:#A9C4B5}
+.wrap{width:min(960px,100% - 32px);margin:20px auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:999px;font:600 1rem 'Sora',system-ui,sans-serif;border:0;cursor:pointer}
+.btn-primary{background:var(--green);color:#fff}.btn-amber{background:var(--amber);color:#12372A}.btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+input{font:inherit;padding:12px 14px;border:2px solid var(--line);border-radius:12px;width:100%}
+label{font-size:.8rem;color:var(--ink-2);display:block;margin-bottom:4px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:.8rem;font-weight:600;background:#EAF3ED;color:var(--ink-2)}
+.chip.live{background:#E3F6EA;color:var(--green)}.chip.done{background:#FFF3D1;color:#8a5f00}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.chip.live i{animation:p 1.4s infinite}@keyframes p{50%{opacity:.25}}
+.notice{background:#FFF8E1;border:1px solid #F2D77A;color:#6b4e00;border-radius:12px;padding:10px 14px;font-size:.85rem;margin-bottom:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.grid3 div{background:var(--bg);border-radius:12px;padding:10px 12px}
+.grid3 small{display:block;color:var(--ink-2);font-size:.72rem}.grid3 strong{font-size:.95rem}
+#map{height:min(62vh,520px);border-radius:16px;margin-top:14px;border:1px solid var(--line)}
+.truck{font-size:26px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.row>*{flex:1;min-width:140px}
+.log{font-size:.8rem;color:var(--ink-2);max-height:120px;overflow:auto;margin-top:12px}
+@media(max-width:560px){.grid3{grid-template-columns:1fr 1fr}}
