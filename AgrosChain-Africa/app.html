@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.png">
+<title>Marketplace · AgrosChain Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="shared.css">
+<style>
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabs button{padding:10px 16px;font-size:.9rem}.tabs .on{background:var(--ink);color:#fff}
+.list{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}.item h3{margin:0 0 4px;font-size:1.05rem}.item small{color:var(--ink-2)}
+.ok{color:var(--green);font-weight:700;font-size:.78rem}.price{font-size:1.2rem;font-weight:700;margin:6px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+dialog{border:0;border-radius:32px;padding:20px;width:min(440px,94vw)}dialog::backdrop{background:rgba(14,42,31,.55)}
+.risk{padding:10px 12px;border-radius:12px;font-size:.85rem;margin:10px 0;background:#FFF3D1}.risk.low{background:#E3F6EA}.risk.high{background:#FDE4E1}
+.steps{display:flex;gap:4px;margin:10px 0}.steps span{flex:1;height:6px;border-radius:4px;background:var(--line)}.steps .d{background:var(--green)}
+.hide{display:none}select{font:inherit;padding:8px;border-radius:10px;border:2px solid var(--line)}
+</style></head><body>
+<div class="bar"><a href="index.html" style="display:flex;align-items:center;gap:8px"><img src="logo.png" alt="" width="30" height="30" style="object-fit:contain">Agros<b>Chain</b> Africa</a>
+<select id="lang" aria-label="Language"><option value="en">English</option><option value="ha">Hausa</option><option value="yo">Yorùbá</option><option value="ig">Igbo</option><option value="pcm">Pidgin</option></select></div>
+<div class="wrap">
+<div class="notice">Prototype: listings, prices and quotes are sample data. Payment is a test-mode simulation of an escrow flow.</div>
+<div class="tabs" id="tabs">
+<button class="btn btn-ghost on" data-t="farm" data-i="market">Buy from farmers</button>
+<button class="btn btn-ghost" data-t="ret" data-i="retail">Retailers</button>
+<button class="btn btn-ghost" data-t="px" data-i="prices">Market prices</button>
+<button class="btn btn-ghost" data-t="sell" data-i="sell">Sell produce</button>
+<button class="btn btn-ghost" data-t="ord" data-i="orders">My orders</button></div>
+<div id="v-farm"><input id="q" data-ph="search" style="margin-bottom:12px"><div class="list" id="L-farm"></div></div>
+<div id="v-ret" class="hide"><div class="list" id="L-ret"></div></div>
+<div id="v-px" class="hide card"><table id="pxt"></table><p style="font-size:.8rem;color:var(--ink-2)">Reference prices (₦/kg), sample data. Connect a live source later.</p></div>
+<div id="v-sell" class="hide card"><div class="row"><div><label>Crop</label><input id="s-crop" placeholder="Tomatoes"></div><div><label>Quantity (kg)</label><input id="s-qty" type="number"></div><div><label>Price ₦/kg</label><input id="s-pr" type="number"></div><div><label>Location</label><input id="s-loc" placeholder="Kano"></div></div><br><button class="btn btn-primary" id="s-add">Post listing</button></div>
+<div id="v-ord" class="hide"><div id="L-ord"></div></div>
+</div>
+<dialog id="dlg"><h3 id="d-t" style="margin:0 0 10px"></h3>
+<label data-i="qty">Quantity (kg)</label><input id="d-q" type="number" min="1">
+<p><label style="display:flex;gap:8px;align-items:center"><input id="d-c" type="checkbox" style="width:auto"><span data-i="cold">Cold transport</span> (+₦25/kg)</label>
+<label style="display:flex;gap:8px;align-items:center;margin-top:6px"><input id="d-i" type="checkbox" style="width:auto"><span data-i="ins">Insurance</span> (+1.5%, partner quote)</label></p>
+<div id="d-r" class="risk"></div><p><b id="d-tot"></b></p>
+<div class="row"><button class="btn btn-ghost" id="d-x">Cancel</button><button class="btn btn-primary" id="d-ok" data-i="ask">Request to buy</button></div></dialog>
+<script>
+const T={en:{market:"Buy from farmers",retail:"Retailers",prices:"Market prices",sell:"Sell produce",orders:"My orders",search:"Search crop or location",ask:"Request to buy",ver:"Verified",qty:"Quantity (kg)",cold:"Cold transport",ins:"Insurance",pay:"Pay to escrow (test)",risk:"Spoilage risk"},
+ha:{market:"Saya daga manoma",retail:"Masu sayarwa",prices:"Farashin kasuwa",sell:"Sayar da amfanin gona",orders:"Odojina",search:"Nemi amfanin gona ko wuri",ask:"Nemi sayayya",ver:"Tabbatacce",qty:"Adadi (kg)",cold:"Sufuri mai sanyi",ins:"Inshora",pay:"Biya (escrow, gwaji)",risk:"Hatsarin lalacewa"},
+yo:{market:"Ra lọ́wọ́ àwọn àgbẹ̀",retail:"Àwọn olùtajà",prices:"Iye owó ọjà",sell:"Ta ọjà",orders:"Àwọn àṣẹ mi",search:"Wá irè oko tàbí ibùdó",ask:"Béèrè láti ra",ver:"Ti jẹ́rìísí",qty:"Iye (kg)",cold:"Gbígbé tútù",ins:"Ìdánilójú (insurance)",pay:"San (escrow, àyẹ̀wò)",risk:"Ewu ìbàjẹ́"},
+ig:{market:"Zụta n'aka ndị ọrụ ugbo",retail:"Ndị na-ere",prices:"Ọnụahịa ahịa",sell:"Ree ihe ọkụkụ",orders:"Iwu m",search:"Chọọ ihe ọkụkụ ma ọ bụ ebe",ask:"Rịọọ ịzụta",ver:"Enyochaala",qty:"Ọnụọgụgụ (kg)",cold:"Njem jụụ",ins:"Mkpuchi (insurance)",pay:"Kwụọ ụgwọ (escrow, nnwale)",risk:"Ihe egwu mmebi"},
+pcm:{market:"Buy from farmer dem",retail:"Retailers",prices:"Market price",sell:"Sell your produce",orders:"My orders",search:"Search crop or place",ask:"Ask to buy",ver:"Verified",qty:"How much (kg)",cold:"Cold transport",ins:"Insurance",pay:"Pay (escrow, test)",risk:"Spoil risk"}};
+// shelf life in days: ambient truck / cold chain
+const CROP={tomatoes:[4,12],onions:[30,90],yam:[60,90],pepper:[5,14],maize:[180,180]};
+const SEED=[
+{id:1,crop:"Tomatoes",qty:5000,pr:450,loc:"Kano",km:1050,who:"Aisha Danladi",type:"farm",ver:1,rt:4.6},
+{id:2,crop:"Onions",qty:8000,pr:380,loc:"Kaduna",km:800,who:"Sabo Farms Coop",type:"farm",ver:1,rt:4.4},
+{id:3,crop:"Pepper",qty:2000,pr:700,loc:"Kaduna",km:800,who:"Musa Ibrahim",type:"farm",ver:0,rt:4.1},
+{id:4,crop:"Maize",qty:20000,pr:420,loc:"Kano",km:1050,who:"Kano Growers Union",type:"farm",ver:1,rt:4.7},
+{id:5,crop:"Yam",qty:3000,pr:900,loc:"Jos",km:900,who:"Plateau Yam Co.",type:"farm",ver:0,rt:4.0},
+{id:6,crop:"Tomatoes",qty:1200,pr:700,loc:"Mile 12, Lagos",km:20,who:"Mile12 Wholesale",type:"ret",ver:1,rt:4.5},
+{id:7,crop:"Onions",qty:2500,pr:520,loc:"Ibadan",km:130,who:"Bodija Traders",type:"ret",ver:1,rt:4.3}];
+const $=i=>document.getElementById(i);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const N=n=>"₦"+Math.round(n).toLocaleString();
+let lang="en",listings=SEED.slice(),orders=[],cur=null;
+try{const a=JSON.parse(localStorage.getItem("agc:orders"));if(a)orders=a;const b=JSON.parse(localStorage.getItem("agc:listings"));if(b)listings=SEED.concat(b)}catch(e){}
+const save=()=>{try{localStorage.setItem("agc:orders",JSON.stringify(orders));localStorage.setItem("agc:listings",JSON.stringify(listings.filter(l=>l.id>100)))}catch(e){}};
+const t=k=>T[lang][k]||T.en[k];
+function risk(l,cold){const s=CROP[l.crop.toLowerCase()]||[30,60],days=Math.max(1,Math.ceil(l.km/400)),
+ r=d=>Math.min(40,Math.round(days/d*35)),a=r(s[0]),c=r(s[1]);
+ return{days,a,c,lvl:a>=15?"high":a>=5?"":"low"}}
+function render(){
+ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));
+ $("q").placeholder=t("search");
+ const q=$("q").value.toLowerCase();
+ const card=l=>{const r=risk(l,0);return`<div class="card item"><h3>${esc(l.crop)} · ${l.qty.toLocaleString()} kg</h3><small>${esc(l.loc)} · ${esc(l.who)}</small><br>${l.ver?`<span class="ok">✔ ${t("ver")}</span>`:""} <small>★ ${l.rt}</small>
+ <div class="price">${N(l.pr)}/kg</div><small>${t("risk")}: ${r.a}% (≈${r.days}d)</small><br><br><button class="btn btn-primary" data-b="${l.id}">${t("ask")}</button></div>`};
+ $("L-farm").innerHTML=listings.filter(l=>l.type==="farm"&&(l.crop+l.loc).toLowerCase().includes(q)).map(card).join("");
+ $("L-ret").innerHTML=listings.filter(l=>l.type==="ret").map(card).join("");
+ $("pxt").innerHTML="<tr><th>Crop</th><th>Kano</th><th>Mile 12</th></tr>"+[["Tomatoes",450,700],["Onions",380,520],["Pepper",700,950],["Maize",420,560],["Yam",900,1200]].map(r=>`<tr><td>${r[0]}</td><td>${N(r[1])}</td><td>${N(r[2])}</td></tr>`).join("");
+ const S=["Requested","Paid to escrow","In transit","Delivered","Payment released"];
+ $("L-ord").innerHTML=orders.length?orders.map((o,i)=>`<div class="card" style="margin-bottom:12px"><b>${o.id}</b> · ${esc(o.crop)} ${o.qty} kg · ${N(o.total)}<br><small>${o.cold?"Cold transport · ":""}${o.ins?"Insurance (partner) · ":""}${S[o.s]}</small>
+ <div class="steps">${S.map((_,k)=>`<span class="${k<=o.s?"d":""}"></span>`).join("")}</div>
+ ${o.s<4?`<button class="btn btn-amber" data-n="${i}">${o.s===0?t("pay"):o.s===1?"Driver pickup (see driver page)":o.s===2?"Mark delivered":"Release payment to seller"}</button>`:"✔ Complete"}
+ <a class="btn btn-ghost" href="track.html?trip=${o.id}">Track</a> <a class="btn btn-ghost" href="driver.html?trip=${o.id}">Driver link</a>
+ <small style="display:block;margin-top:6px">Verified order history and ratings build seller trust.</small></div>`).join(""):"<div class='card'>No orders yet.</div>";
+}
+function quote(){const l=cur,q=+$("d-q").value||0,c=$("d-c").checked,i=$("d-i").checked,r=risk(l),g=q*l.pr,tot=g+(c?q*25:0)+(i?g*.015:0),loss=c?r.c:r.a;
+ $("d-r").className="risk "+(c?"low":r.lvl);$("d-r").innerHTML=`${t("risk")}: <b>${loss}%</b> ${c?"with":"without"} cold transport (~${r.days} days to Lagos). Ambient ${r.a}% vs cold ${r.c}%. <small>Illustrative assumption, not measured.</small>`;
+ $("d-tot").textContent="Total: "+N(tot);return{q,c,i,tot}}
+document.addEventListener("click",e=>{const b=e.target;
+ if(b.dataset.t){document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));["farm","ret","px","sell","ord"].forEach(k=>$("v-"+k).classList.toggle("hide",k!==b.dataset.t))}
+ if(b.dataset.b){cur=listings.find(l=>l.id==b.dataset.b);$("d-t").textContent=cur.crop+" · "+cur.loc;$("d-q").value=Math.min(500,cur.qty);quote();$("dlg").showModal()}
+ if(b.dataset.n!==undefined){const o=orders[+b.dataset.n];o.s++;save();render()}});
+["d-q","d-c","d-i"].forEach(i=>$(i).addEventListener("input",quote));
+$("d-x").onclick=()=>$("dlg").close();
+$("d-ok").onclick=()=>{const x=quote();if(!x.q||x.q>cur.qty){alert("Enter a valid quantity.");return}
+ orders.unshift({id:"AF-"+(2000+Math.floor(Math.random()*8000)),crop:cur.crop,qty:x.q,cold:x.c,ins:x.i,total:x.tot,s:0});save();$("dlg").close();render();document.querySelector('[data-t="ord"]').click()};
+$("s-add").onclick=()=>{const c=$("s-crop").value.trim(),q=+$("s-qty").value,p=+$("s-pr").value,lo=$("s-loc").value.trim();if(!c||!q||!p||!lo){alert("Fill all fields.");return}
+ listings.push({id:100+listings.length,crop:c,qty:q,pr:p,loc:lo,km:800,who:"You (unverified)",type:"farm",ver:0,rt:0});save();render();document.querySelector('[data-t="farm"]').click()};
+$("lang").onchange=e=>{lang=e.target.value;render()};$("q").oninput=render;render();
+</script></body></html>

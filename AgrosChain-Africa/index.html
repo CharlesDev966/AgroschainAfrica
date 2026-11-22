@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.png">
+<title>AgrosChain Africa — Farm to market, direct</title>
+<meta name="description" content="AgrosChain Africa connects Nigerian farmers directly to wholesalers and retailers, with logistics and insurance options via partners, and live tracking from farm gate to delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0D0B; --paper:#fff; --mist:#ECEDE8; --chalk:#F4F5F1; --line:#E1E4DD;
+  --muted:#5A645D; --muted-d:#A8B0AA;
+  --green:#12B35A; --lime:#9BD21D; --amber:#FFB000; --orange:#FF5F1F; --cyan:#19C3E6;
+  --grad:linear-gradient(90deg,#12B35A 0%,#9BD21D 36%,#FFB000 66%,#FF5F1F 100%);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter Tight',system-ui,sans-serif;color:var(--ink);background:var(--mist);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+p{margin:0}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.045em;line-height:.98}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:inline-block;padding-bottom:.08em}
+.h2{font-size:clamp(2.5rem,6.2vw,5.2rem)}
+.lead{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--muted);max-width:46ch;line-height:1.4}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 28px;border-radius:999px;font:600 1rem 'Inter Tight',sans-serif;letter-spacing:-.01em;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-grad{background:var(--grad);color:var(--ink);box-shadow:0 10px 28px rgba(255,140,0,.25)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+/* header */
+header{position:sticky;top:12px;z-index:30;margin-top:12px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px;padding:0 12px 0 20px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 8px 30px rgba(10,13,11,.07)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.3rem;letter-spacing:-.05em;white-space:nowrap}
+.brand img{object-fit:contain}
+.links{display:flex;gap:22px;font-size:.93rem;font-weight:500;color:var(--muted);white-space:nowrap}
+@media(max-width:1180px){.links a.opt{display:none}}
+.links a:hover{color:var(--ink)}
+.links .mk{color:var(--ink);font-weight:700}
+.nav .btn{padding:12px 22px;font-size:.92rem}
+.menu-btn{display:none;background:#fff;border:2px solid var(--line);border-radius:50%;width:44px;height:44px;font-size:1.2rem;color:var(--ink);cursor:pointer}
+@media(max-width:900px){
+  .brand{font-size:1.05rem;flex:1;min-width:0}
+  .nav .btn{padding:10px 16px;font-size:.8rem;white-space:nowrap}
+  .menu-btn{display:block}
+  .links{display:none;position:absolute;left:0;right:0;top:78px;flex-direction:column;gap:0;background:#fff;border-radius:28px;box-shadow:0 24px 50px rgba(10,13,11,.16);padding:8px 22px 14px}
+  .links.open{display:flex}.links.open a.opt{display:block}
+.links a.mo{display:none}
+@media(max-width:480px){.nav>.btn{display:none}.links.open a.mo{display:block;font-weight:700}}
+  .links a{padding:15px 4px;border-bottom:1px solid var(--line);font-size:1.05rem}
+  .links a:last-child{border:0}
+}
+
+/* hero */
+.hero{padding:56px 0 24px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:8px 16px 8px 12px;font-size:.88rem;font-weight:600;margin-bottom:26px}
+.pill i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(18,179,90,.6);animation:ping 1.8s infinite}
+@keyframes ping{100%{box-shadow:0 0 0 10px rgba(18,179,90,0)}}
+.hero h1{font-size:clamp(3.4rem,9.4vw,8rem);letter-spacing:-.06em;line-height:.9}
+.hero .lead{margin:28px 0 34px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr}.hero{padding-top:36px}}
+
+.hero-vis{position:relative;padding:36px 0 40px}
+.phone{position:relative;background:var(--ink);color:#fff;border-radius:48px;padding:26px 22px 22px;width:min(400px,100%);margin-inline:auto;box-shadow:0 40px 80px rgba(10,13,11,.28)}
+.phone-top{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--muted-d);margin-bottom:6px}
+.live{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-weight:700}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ping 1.6s infinite}
+.phone h4{font-size:1.7rem;margin-bottom:16px}
+.map{background:radial-gradient(circle at 30% 20%,#17321F,#0B1A11);border-radius:30px;height:290px;position:relative;overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stats div{background:rgba(255,255,255,.07);border-radius:18px;padding:11px 12px}
+.stats small{display:block;color:var(--muted-d);font-size:.72rem}
+.stats strong{font-size:.95rem;letter-spacing:-.02em}
+.tile{position:absolute;display:grid;place-items:center;width:84px;height:84px;background:#fff;border-radius:26px;box-shadow:0 18px 36px rgba(10,13,11,.2)}
+.tile img{width:60px;height:60px;object-fit:contain}
+.t-hero{left:-16px;top:-12px;transform:rotate(-9deg)}
+.bubble{position:absolute;background:var(--ink);color:#fff;border-radius:18px;padding:11px 16px;font-weight:600;font-size:.92rem;letter-spacing:-.02em;line-height:1.2;box-shadow:0 14px 30px rgba(10,13,11,.22)}
+.glass{position:absolute;background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(226,231,224,.6));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:9px 14px;font-weight:700;font-size:.92rem;letter-spacing:-.02em;color:var(--ink);box-shadow:0 12px 28px rgba(10,13,11,.14);white-space:nowrap}
+.b-hero{right:-12px;top:128px}
+.g-hero{right:6px;bottom:6px}
+@media(max-width:480px){.b-hero{right:0}.t-hero{left:0}.tile{width:70px;height:70px;border-radius:22px}.tile img{width:50px;height:50px}}
+
+/* panels */
+section{padding:56px 0}
+.sec-head{margin-bottom:40px}
+.sec-head .lead{margin-top:18px}
+.panels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.panel{position:relative;overflow:hidden;border-radius:44px;min-height:580px;padding:36px 30px;background:#fff}
+.panel.dark{background:var(--ink);color:#fff}
+.panel h3{font-size:clamp(2.1rem,3.1vw,2.9rem);line-height:.96;letter-spacing:-.05em;max-width:9em}
+.panel p{margin-top:14px;color:var(--muted);font-size:1.02rem;line-height:1.35;max-width:24ch}
+.panel.dark p{color:var(--muted-d)}
+.art{position:absolute;left:0;right:0;bottom:0;height:340px}
+@media(max-width:1020px){.panels{grid-template-columns:1fr 1fr}}
+@media(max-width:660px){.panels{grid-template-columns:1fr}.panel{min-height:560px}}
+
+/* 1 ring */
+.ring{position:absolute;left:50%;bottom:-170px;width:400px;height:400px;margin-left:-200px;border-radius:50%;background:conic-gradient(from 200deg,#12B35A,#9BD21D,#FFB000,#FF5F1F,#12B35A);-webkit-mask:radial-gradient(circle,transparent 50%,#000 51%);mask:radial-gradient(circle,transparent 50%,#000 51%);filter:drop-shadow(0 24px 30px rgba(18,179,90,.3))}
+.a1 .tile{left:26px;bottom:150px;width:76px;height:76px;transform:rotate(-8deg)}
+.a1 .tile img{width:54px;height:54px}
+.a1 .bubble{left:50%;top:6px;transform:translateX(-30%)}
+.a1 .c1{right:22px;bottom:200px}
+.a1 .c2{left:50%;bottom:36px;transform:translateX(-50%)}
+
+/* 2 request */
+.req{position:absolute;left:8%;right:8%;bottom:-46px;padding:22px 20px 70px;border-radius:32px;border:5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,var(--cyan),var(--green) 45%,var(--orange)) border-box;color:var(--ink)}
+.req-h{font-weight:700;font-size:1.05rem;letter-spacing:-.03em;margin-bottom:12px}
+.req-row{display:flex;align-items:center;gap:12px;padding:9px 0}
+.req-row i{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#D9EFE0,#C5E8D2)}
+.req-row:nth-of-type(3) i{background:linear-gradient(135deg,#FFE9B8,#FFD98A)}
+.req-row b{display:block;font-size:.92rem;letter-spacing:-.02em}
+.req-row span{display:block;font-size:.8rem;color:var(--muted)}
+.acc{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);padding:13px 26px;border-radius:12px;background:linear-gradient(90deg,var(--cyan),var(--amber) 60%,var(--orange));font-weight:700;font-size:.95rem;color:#fff;white-space:nowrap;box-shadow:0 12px 24px rgba(255,95,31,.25)}
+
+/* 3 orbit */
+.orbit{position:absolute;left:50%;top:50%;width:340px;height:340px;transform:translate(-50%,-47%)}
+.orbit .o{position:absolute;border-radius:50%;border:1.5px dashed #CBD1C8}
+.o1{inset:62px}.o2{inset:0}
+.orbit .tile{left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:30px}
+.orbit .tile img{width:68px;height:68px}
+.dot{position:absolute;left:67%;top:38%;width:26px;height:26px;border-radius:50%;background:#1ED760;box-shadow:0 0 0 0 rgba(30,215,96,.6);animation:ping 1.8s infinite}
+.node{position:absolute;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--muted)}
+.node b{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:#fff;font-size:1.4rem;box-shadow:0 8px 20px rgba(10,13,11,.14);border:2px solid #fff;outline:2px solid #BFE9CF}
+.n1{left:6%;top:4%}.n2{right:-2%;top:16%}.n3{right:8%;bottom:4%}.n4{left:-4%;bottom:20%}
+
+/* 4 listings */
+.lst{position:absolute;width:47%;padding:16px 16px 14px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:0 22px 44px rgba(10,13,11,.13)}
+.lst .em{font-size:2rem;line-height:1}
+.lst b{display:block;font-size:1.15rem;letter-spacing:-.035em;margin-top:6px}
+.lst small{display:block;color:var(--muted);font-size:.78rem}
+.lst .px{font-size:1.25rem;font-weight:700;letter-spacing:-.04em;margin:6px 0 8px}
+.ver{display:inline-flex;align-items:center;gap:5px;background:#E3F6EA;color:#0B7A3B;font-weight:700;font-size:.74rem;padding:4px 10px;border-radius:999px}
+.l1{left:3%;bottom:104px;transform:rotate(-9deg)}
+.l3{right:3%;bottom:104px;transform:rotate(9deg)}
+.l2{left:26.5%;bottom:-34px;z-index:2}
+
+/* 5 naira */
+.naira{position:absolute;left:50%;bottom:48px;width:250px;margin-left:-125px;filter:drop-shadow(0 20px 40px rgba(255,140,0,.28))}
+.a5 .glass{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;box-shadow:none}
+.a5 .c1{right:20px;top:6px}
+.a5 .c2{left:20px;top:64px}
+.note{position:absolute;left:18px;right:18px;bottom:20px;display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:20px;background:rgba(40,44,41,.82);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:.82rem;line-height:1.25;color:#fff;z-index:2}
+.note .tile{position:static;width:40px;height:40px;border-radius:12px;box-shadow:none;flex:none;transform:none}
+.note .tile img{width:30px;height:30px}
+.note b{display:block;font-size:.88rem}
+.note span{color:var(--muted-d)}
+
+/* 6 languages */
+.bub{position:absolute;padding:9px 24px 11px;border-radius:999px;font-size:2.1rem;font-weight:700;letter-spacing:-.045em;line-height:1.1;box-shadow:0 14px 28px rgba(10,13,11,.12)}
+.bu1{left:7%;bottom:262px;background:var(--ink);color:#fff;transform:rotate(-4deg)}
+.bu2{right:7%;bottom:200px;background:var(--green);color:var(--ink);transform:rotate(3deg)}
+.bu3{left:9%;bottom:138px;background:var(--amber);color:var(--ink);transform:rotate(-2deg)}
+.bu4{right:10%;bottom:76px;background:var(--orange);color:var(--ink);transform:rotate(4deg)}
+.bu5{left:12%;bottom:12px;background:var(--lime);color:var(--ink);transform:rotate(-3deg)}
+
+/* problem */
+.dark-block{background:var(--ink);color:#fff;border-radius:56px;padding:clamp(36px,6vw,76px)}
+.dark-block .lead{color:var(--muted-d);margin-top:22px}
+.chain-rows{display:grid;gap:14px;margin-top:44px}
+.chain{border-radius:32px;padding:26px 28px;background:rgba(255,255,255,.07)}
+.chain.new{background:var(--grad);color:var(--ink)}
+.chain h3{font-size:1.5rem;margin-bottom:16px;letter-spacing:-.04em}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.step{padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:600;font-size:.95rem;letter-spacing:-.02em}
+.step.bad{background:rgba(255,95,70,.2);color:#FF9C8C}
+.chain.new .step{background:#fff;color:var(--ink)}
+.arr{color:var(--muted-d);font-weight:700}
+.chain.new .arr{color:var(--ink)}
+.chain p{margin-top:16px;color:var(--muted-d);font-size:.98rem;max-width:60ch}
+.chain.new p{color:rgba(10,13,11,.8)}
+
+/* how */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.how-card{background:#fff;border-radius:36px;padding:30px 26px 32px;min-height:330px;display:flex;flex-direction:column}
+.how-card .n{font-size:6.5rem;font-weight:800;letter-spacing:-.08em;line-height:.85;margin-bottom:auto;padding-bottom:30px}
+.how-card:nth-child(1) .n{background-size:400% 100%;background-position:0% 0}.how-card:nth-child(2) .n{background-size:400% 100%;background-position:34% 0}.how-card:nth-child(3) .n{background-size:400% 100%;background-position:67% 0}.how-card:nth-child(4) .n{background-size:400% 100%;background-position:100% 0}
+.how-card h3{font-size:1.65rem;letter-spacing:-.045em}
+.how-card p{margin-top:10px;color:var(--muted);font-size:.98rem;line-height:1.4}
+@media(max-width:1020px){.how-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.how-grid{grid-template-columns:1fr}.how-card{min-height:280px}}
+
+/* who */
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.who{border-radius:44px;padding:36px 32px 38px;min-height:420px;display:flex;flex-direction:column}
+.who h3{font-size:clamp(2.6rem,4.6vw,3.8rem);letter-spacing:-.06em;margin-bottom:auto;padding-bottom:40px}
+.who ul{margin:0;padding:0;list-style:none;display:grid;gap:12px;font-size:1.08rem;font-weight:500;letter-spacing:-.02em}
+.who li{display:flex;gap:12px;align-items:flex-start;line-height:1.25}
+.who li::before{content:"";flex:none;width:22px;height:22px;margin-top:-1px;border-radius:50%;background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/13px no-repeat}
+.who.f{background:linear-gradient(160deg,#12B35A,#9BD21D)}
+.who.w{background:var(--ink);color:#fff}
+.who.w li::before{background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0D0B' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E")}
+.who.r{background:linear-gradient(160deg,#FFB000,#FF8A1F)}
+@media(max-width:900px){.who-grid{grid-template-columns:1fr}.who{min-height:340px}}
+
+/* impact */
+.impact{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
+.sdg{position:relative;overflow:hidden;border-radius:44px;padding:36px 34px;min-height:480px;color:#fff;background:linear-gradient(150deg,#0E8A45,#0A5C30)}
+.sdg .big{position:absolute;right:24px;bottom:-70px;font-size:21rem;font-weight:800;line-height:1;letter-spacing:-.08em;background:linear-gradient(180deg,#FFD25A,#FF8A1F);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.sdg h3{font-size:clamp(2.2rem,3.6vw,3.2rem);max-width:7em;letter-spacing:-.05em}
+.sdg p{margin-top:16px;max-width:26ch;color:#CFEBD9;font-size:1.02rem;line-height:1.35;position:relative;z-index:1}
+.sdg h3{position:relative;z-index:1}
+.impact-copy{background:#fff;border-radius:44px;padding:clamp(30px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
+.impact-copy .lead{margin:18px 0 8px}
+.impact ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.impact li{display:flex;gap:14px;align-items:flex-start;color:var(--muted);font-size:1.05rem;line-height:1.35}
+.impact li b{color:var(--ink)}
+.chk{flex:none;width:28px;height:28px;border-radius:50%;background:var(--grad);display:grid;place-items:center}
+.chk svg{width:14px;height:14px;stroke:var(--ink);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:900px){.impact{grid-template-columns:1fr}.sdg{min-height:420px}}
+
+/* join */
+.join-block{background:var(--ink);color:#fff;border-radius:56px;padding:clamp(32px,6vw,76px);text-align:center}
+.join-block .lead{color:var(--muted-d);margin:20px auto 0}
+.form{max-width:680px;margin:38px auto 0;background:#fff;color:var(--ink);border-radius:36px;padding:28px;display:grid;gap:14px;text-align:left}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:7px;font-size:.84rem;font-weight:600}
+input,select{font:inherit;font-weight:400;padding:14px 16px;border-radius:16px;border:2px solid var(--line);background:#fff;color:var(--ink);width:100%}
+.ok{display:none;text-align:center;padding:14px;border-radius:16px;background:#E3F6EA;color:#0B7A3B;font-weight:700}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+
+footer{padding:40px 0 48px;color:var(--muted);font-size:.92rem}
+.foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+footer .brand{color:var(--ink)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap" style="position:relative">
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="AgrosChain Africa home">
+        <img src="logo.png" alt="" width="42" height="42">
+        <span>AgrosChain Africa</span>
+      </a>
+      <nav class="links" aria-label="Main">
+        <a class="opt" href="#problem">The problem</a>
+        <a href="#how">How it works</a>
+        <a class="opt" href="#features">Features</a>
+        <a href="#who">Who it's for</a>
+        <a class="opt" href="#impact">Impact</a>
+        <a class="mk" href="app.html">Marketplace</a>
+        <a href="track.html">Track a shipment</a>
+        <a class="mo" href="#join">Join the waitlist</a>
+      </nav>
+      <a class="btn btn-dark" href="#join">Join the waitlist</a>
+      <button class="menu-btn" id="mb" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><i></i>Waitlist open · Made in Nigeria</span>
+      <h1>Farm to market, <span class="g">direct.</span></h1>
+      <p class="lead">AgrosChain Africa connects farmers to wholesalers, and wholesalers to retailers, with logistics and insurance options via partners, and live tracking, so food moves from the farm gate to your shelf without a chain of middlemen.</p>
+      <div class="cta">
+        <a class="btn btn-grad" href="#join">Get early access</a>
+        <a class="btn btn-line" href="app.html">Open the marketplace</a>
+      </div>
+    </div>
+
+    <div class="hero-vis" aria-label="Illustration of live shipment tracking">
+      <div class="phone">
+        <div class="phone-top"><span>Order #AF-2041</span><span class="live"><i></i>Live</span></div>
+        <h4>Maize, 20 tonnes</h4>
+        <div class="map">
+          <svg id="mapsvg" viewBox="0 0 360 290" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="rgba(255,255,255,.06)"/></pattern>
+              <linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#12B35A"/><stop offset=".5" stop-color="#FFB000"/><stop offset="1" stop-color="#FF5F1F"/></linearGradient>
+            </defs>
+            <rect width="360" height="290" fill="url(#grid)"/>
+            <path d="M44 232 C100 244 120 120 190 140 S290 60 322 66" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="9" stroke-linecap="round"/>
+            <path d="M44 232 C100 244 120 120 190 140 S290 60 322 66" fill="none" stroke="url(#rg)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+            <circle cx="44" cy="232" r="10" fill="#12B35A"/><circle cx="44" cy="232" r="4" fill="#0A0D0B"/>
+            <circle cx="322" cy="66" r="10" fill="#FF5F1F"/><circle cx="322" cy="66" r="4" fill="#0A0D0B"/>
+            <text x="44" y="262" fill="#A8B0AA" font-size="12" text-anchor="middle" font-family="Inter Tight,sans-serif">Farm</text>
+            <text x="322" y="96" fill="#A8B0AA" font-size="12" text-anchor="middle" font-family="Inter Tight,sans-serif">Wholesaler</text>
+            <g>
+              <circle r="20" fill="#FFB000" opacity=".3"/><circle r="10" fill="#FFB000"/><circle r="3.5" fill="#0A0D0B"/>
+              <animateMotion dur="7s" repeatCount="indefinite" path="M44 232 C100 244 120 120 190 140 S290 60 322 66" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1"/>
+            </g>
+          </svg>
+        </div>
+        <div class="stats">
+          <div><small>Status</small><strong>In transit</strong></div>
+          <div><small>Cover</small><strong>Optional</strong></div>
+          <div><small>Updates</small><strong>Real time</strong></div>
+        </div>
+      </div>
+      <div class="tile t-hero"><img src="logo.png" alt=""></div>
+      <div class="bubble b-hero">Kano to Lagos,<br>on the road</div>
+      <span class="glass g-hero">Direct from the farm</span>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">Built for trust across <span class="g">long distances.</span></h2>
+      <p class="lead">Buying from a farmer hundreds of kilometres away should feel as safe as buying down the road.</p>
+    </div>
+
+    <div class="panels">
+      <article class="panel">
+        <h3>Order straight from the <span class="g">farm.</span></h3>
+        <p>Wholesalers and retailers buy from the source, with no chain of introductions.</p>
+        <div class="art a1" aria-hidden="true">
+          <div class="ring"></div>
+          <div class="tile"><img src="logo.png" alt=""></div>
+          <div class="bubble">Maize · 20,000 kg · Kano</div>
+          <span class="glass c1">Fairer prices</span>
+          <span class="glass c2">3 middlemen skipped</span>
+        </div>
+      </article>
+
+      <article class="panel dark">
+        <h3>Farmers list. Buyers <span class="g">request.</span></h3>
+        <p>Every request, order and payment stays on record.</p>
+        <div class="art" aria-hidden="true">
+          <div class="req">
+            <div class="req-h">Request to buy</div>
+            <div class="req-row"><i></i><div><b>Wholesaler, Lagos</b><span>Maize · 20,000 kg</span></div></div>
+            <div class="req-row"><i></i><div><b>Retailer, Ibadan</b><span>Onions · 2,500 kg</span></div></div>
+            <span class="acc">Accept request</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h3>Watch it <span class="g">move.</span></h3>
+        <p>Live GPS from the farm gate to the buyer's door.</p>
+        <div class="art" aria-hidden="true">
+          <div class="orbit">
+            <div class="o o2"></div><div class="o o1"></div>
+            <div class="tile"><img src="logo.png" alt=""></div>
+            <span class="dot"></span>
+            <div class="node n1"><b>🌾</b>Farmer</div>
+            <div class="node n2"><b>🚚</b>Driver</div>
+            <div class="node n3"><b>🏬</b>Wholesaler</div>
+            <div class="node n4"><b>🛒</b>Retailer</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h3><span class="g">Verified</span> farms. Fresh produce.</h3>
+        <p>See who you are buying from before you order.</p>
+        <div class="art" aria-hidden="true">
+          <div class="lst l1"><span class="em">🧅</span><b>Onions</b><small>Kaduna · 800 km</small><div class="px">₦380/kg</div><span class="ver">✓ Verified</span></div>
+          <div class="lst l3"><span class="em">🌽</span><b>Maize</b><small>Kano · 1,050 km</small><div class="px">₦420/kg</div><span class="ver">✓ Verified</span></div>
+          <div class="lst l2"><span class="em">🍅</span><b>Tomatoes</b><small>Kano · 1,050 km</small><div class="px">₦450/kg</div><span class="ver">✓ Verified</span></div>
+        </div>
+      </article>
+
+      <article class="panel dark">
+        <h3>Cover it, <span class="g">if you want.</span></h3>
+        <p>Add cold transport or insurance on any order.</p>
+        <div class="art a5" aria-hidden="true">
+          <svg class="naira" viewBox="0 0 220 220" fill="none" stroke="url(#ng)" stroke-width="38" stroke-linecap="round" stroke-linejoin="round">
+            <defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19C3E6"/><stop offset=".45" stop-color="#FFB000"/><stop offset="1" stop-color="#FF5F1F"/></linearGradient></defs>
+            <path d="M50 190V40l120 150V40"/><path d="M14 92h192M14 140h192" stroke-width="22"/>
+          </svg>
+          <span class="glass c1">+₦25/kg cold transport</span>
+          <span class="glass c2">+1.5% insurance</span>
+          <div class="note"><div class="tile"><img src="logo.png" alt=""></div><div><b>AgrosChain Africa</b><span>Insurance quote ready for order #AF-2041.</span></div></div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h3>Speak your <span class="g">language.</span></h3>
+        <p>English, Hausa, Yorùbá, Igbo and Pidgin.</p>
+        <div class="art" aria-hidden="true">
+          <span class="bub bu1">Hello</span>
+          <span class="bub bu2">Sannu</span>
+          <span class="bub bu3">Báwo ni?</span>
+          <span class="bub bu4">Nnọọ</span>
+          <span class="bub bu5">How far?</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="dark-block">
+      <h2 class="h2">Too many hands between the farm and the <span class="g">market.</span></h2>
+      <p class="lead">Most of Nigeria's food is grown in the north, while many buyers are in the south and east. Today, reaching a farmer often means finding someone who knows someone who knows another person.</p>
+      <div class="chain-rows">
+        <div class="chain">
+          <h3>Today</h3>
+          <div class="steps">
+            <span class="step">Farmer</span><span class="arr">→</span>
+            <span class="step bad">Agent</span><span class="arr">→</span>
+            <span class="step bad">Middleman</span><span class="arr">→</span>
+            <span class="step bad">Middleman</span><span class="arr">→</span>
+            <span class="step">Wholesaler</span><span class="arr">→</span>
+            <span class="step">Retailer</span>
+          </div>
+          <p>Every extra hand adds a margin, a delay and a risk. The price rises before the food ever reaches the shelf.</p>
+        </div>
+        <div class="chain new">
+          <h3>With AgrosChain Africa</h3>
+          <div class="steps">
+            <span class="step">Farmer</span><span class="arr">→</span>
+            <span class="step">Wholesaler</span><span class="arr">→</span>
+            <span class="step">Retailer</span>
+          </div>
+          <p>Buyers order straight from farmers on one platform, with logistics, insurance and tracking built into every order.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">From harvest to delivery in <span class="g">four steps.</span></h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card"><div class="n g">1</div><h3>Farmers list produce</h3><p>Farmers post what they grow, how much they have and when it will be ready.</p></div>
+      <div class="how-card"><div class="n g">2</div><h3>Wholesalers order direct</h3><p>Buyers anywhere in the country browse, compare and order straight from the source.</p></div>
+      <div class="how-card"><div class="n g">3</div><h3>Partner logistics</h3><p>Our logistics and insurance partners collect the goods and move them to the buyer, with optional cover.</p></div>
+      <div class="how-card"><div class="n g">4</div><h3>Track and receive</h3><p>Wholesalers watch the shipment on a live map, confirm delivery, then supply retailers.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">One platform, <span class="g">three winners.</span></h2>
+      <p class="lead">Everyone along the food chain gets a simpler, safer way to trade.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who f"><h3>Farmers</h3><ul><li>Reach buyers across the country</li><li>Sell at fairer prices</li><li>Ship with partner logistics</li></ul></div>
+      <div class="who w"><h3>Wholesalers</h3><ul><li>Order straight from the source</li><li>Track goods live on a map</li><li>Add insurance via partners</li></ul></div>
+      <div class="who r"><h3>Retailers</h3><ul><li>Restock from trusted wholesalers</li><li>Get fresher produce, faster</li><li>Benefit from lower costs</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="impact">
+  <div class="wrap impact">
+    <div class="sdg">
+      <h3>SDG 2: Zero Hunger</h3>
+      <p>We support the UN goal of ending hunger by making food easier to move, easier to afford and less likely to be lost on the way.</p>
+      <div class="big" aria-hidden="true">2</div>
+    </div>
+    <div class="impact-copy">
+      <h2 class="h2" style="font-size:clamp(2.4rem,5vw,4.2rem)">Cheaper food, <span class="g">stronger farms.</span></h2>
+      <p class="lead">Cutting out extra links in the chain helps food cost less for people in every part of the country.</p>
+      <ul>
+        <li><span class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Fewer middlemen,</b> lower prices for families</span></li>
+        <li><span class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Safer routes,</b> so food reaches regions that need it</span></li>
+        <li><span class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Better income</b> for the farmers who grow our food</span></li>
+        <li><span class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><span><b>Less waste,</b> with faster routes from farm to market</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <div class="join-block">
+      <h2 class="h2">Be among the first on <span class="g">AgrosChain Africa.</span></h2>
+      <p class="lead">Tell us who you are and we'll reach out as we open to farmers, wholesalers and retailers.</p>
+      <form class="form" id="waitlist" novalidate>
+        <div class="row">
+          <label>Full name<input name="name" type="text" autocomplete="name" required placeholder="Your name"></label>
+          <label>I am a<select name="role" required><option value="">Choose one</option><option>Farmer</option><option>Wholesaler</option><option>Retailer</option><option>Logistics or insurance partner</option><option>Other</option></select></label>
+        </div>
+        <div class="row">
+          <label>Phone or email<input name="contact" type="text" autocomplete="email" required placeholder="08012345678 or you@email.com"></label>
+          <label>State<input name="state" type="text" placeholder="e.g. Kaduna, Lagos"></label>
+        </div>
+        <button class="btn btn-grad" type="submit">Join the waitlist</button>
+        <div class="ok" id="ok" role="status">Thank you! We'll be in touch soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top"><img src="logo.png" alt="" width="38" height="38"><span>AgrosChain Africa</span></a>
+    <span>Farm to market, direct. Made in Nigeria.</span>
+    <span>© <span id="yr">2026</span> AgrosChain Africa</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Pause the truck animation for people who prefer reduced motion
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var s = document.getElementById('mapsvg');
+    if (s && s.pauseAnimations) s.pauseAnimations();
+  }
+
+  // Waitlist form (demo: shows a thank-you message; connect to your backend or form service to collect entries)
+  document.getElementById('waitlist').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var f = ev.target;
+    if(!f.name.value.trim() || !f.role.value || !f.contact.value.trim()){
+      (!f.name.value.trim() ? f.name : !f.role.value ? f.role : f.contact).focus();
+      return;
+    }
+    document.getElementById('ok').style.display = 'block';
+    f.reset();
+  });
+
+  // Mobile menu
+  (function(){
+    var b = document.getElementById('mb'), l = document.querySelector('.links');
+    if(!b || !l) return;
+    b.onclick = function(){ var o = l.classList.toggle('open'); b.setAttribute('aria-expanded', o); b.textContent = o ? '✕' : '☰'; };
+    l.addEventListener('click', function(e){ if(e.target.closest('a')){ l.classList.remove('open'); b.textContent = '☰'; } });
+  })();
+</script>
+</body>
+</html>

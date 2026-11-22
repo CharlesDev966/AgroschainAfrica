@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.png">
+<title>Track shipment · AgrosChain Africa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="shared.css">
+</head><body>
+<div class="bar"><a href="index.html" style="display:flex;align-items:center;gap:8px"><img src="logo.png" alt="" width="30" height="30" style="object-fit:contain">Agros<b>Chain</b> Africa · Tracking</a><a class="back" href="driver.html">Driver page</a></div>
+<div class="wrap">
+  <div class="card">
+    <div id="demoNote" class="notice" hidden>Demo mode: only tabs in this same browser can see driver updates. Add your Firebase URL in config.js for phone-to-laptop tracking.</div>
+    <div class="row">
+      <div><label for="trip">Order / trip ID</label><input id="trip" placeholder="AF-2041" value="AF-2041" autocapitalize="characters"></div>
+      <button id="go" class="btn btn-primary">Track</button>
+      <button id="sim" class="btn btn-ghost">Run demo route</button>
+    </div>
+    <div style="margin-top:12px"><span id="chip" class="chip"><i></i><span id="chipTxt">Enter an order ID</span></span></div>
+    <div class="grid3">
+      <div><small>Last update</small><strong id="upd">–</strong></div>
+      <div><small>Speed</small><strong id="spd">–</strong></div>
+      <div><small>Distance to Lagos (straight line)</small><strong id="dist">–</strong></div>
+    </div>
+    <div id="map"></div>
+    <p id="simNote" class="notice" style="margin-top:12px" hidden>Demo simulation: this is sample data on a Kano → Lagos route, not a real shipment.</p>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="config.js"></script>
+<script src="tracker.js"></script>
+<script>
+const $ = (i) => document.getElementById(i);
+if (AGC.demo) $("demoNote").hidden = false;
+
+const ROUTE = [
+  { n: "Kano", c: [12.0022, 8.5919] }, { n: "Kaduna", c: [10.5264, 7.4388] },
+  { n: "Abuja", c: [9.0765, 7.3986] }, { n: "Lokoja", c: [7.8023, 6.7333] },
+  { n: "Ibadan", c: [7.3775, 3.9470] }, { n: "Lagos", c: [6.5244, 3.3792] }
+];
+const map = L.map("map").setView([9.3, 6.2], 6);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap contributors" }).addTo(map);
+L.polyline(ROUTE.map(r => r.c), { color: "#1F8A4C", weight: 4, dashArray: "8 8", opacity: .7 }).addTo(map);
+ROUTE.forEach(r => L.circleMarker(r.c, { radius: 6, color: "#12372A", fillColor: "#F2A900", fillOpacity: 1, weight: 2 }).addTo(map).bindTooltip(r.n, { permanent: r === ROUTE[0] || r === ROUTE[5], direction: "top" }));
+const truck = L.marker(ROUTE[0].c, { icon: L.divIcon({ className: "", html: '<div class="truck">🚚</div>', iconSize: [28, 28], iconAnchor: [14, 14] }) });
+const trail = L.polyline([], { color: "#F2A900", weight: 5 }).addTo(map);
+let shown = false, pollTimer = null, simTimer = null, curId = "";
+
+function km(a, b) {
+  const R = 6371, d = Math.PI / 180, dLat = (b[0] - a[0]) * d, dLng = (b[1] - a[1]) * d;
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(a[0] * d) * Math.cos(b[0] * d) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(x));
+}
+function ago(t) {
+  const s = Math.max(0, Math.round((Date.now() - t) / 1000));
+  if (s < 60) return s + "s ago"; if (s < 3600) return Math.round(s / 60) + " min ago"; return Math.round(s / 3600) + " h ago";
+}
+function chip(cls, txt) { $("chip").className = "chip " + cls; $("chipTxt").textContent = txt; }
+function place(p, label) {
+  if (!shown) { truck.addTo(map); shown = true; }
+  truck.setLatLng([p.lat, p.lng]);
+  $("dist").textContent = Math.round(km([p.lat, p.lng], ROUTE[5].c)) + " km";
+  $("spd").textContent = p.spd == null ? "–" : p.spd + " km/h";
+  $("upd").textContent = label || ago(p.t);
+}
+async function poll() {
+  try {
+    const d = await AGC.getTrip(curId);
+    if (!d.points.length) { chip("", d.status === "in_transit" ? "Trip started, waiting for GPS" : "Waiting for the driver to start"); return; }
+    const last = d.points[d.points.length - 1];
+    trail.setLatLngs(d.points.map(p => [p.lat, p.lng]));
+    place(last);
+    if (d.status === "delivered") { chip("done", "Delivered"); }
+    else { chip("live", "In transit"); }
+    if (!poll.fitted) { map.setView([last.lat, last.lng], 9); poll.fitted = true; }
+  } catch (e) { chip("", "Connection problem, retrying…"); }
+}
+function stopAll() { clearInterval(pollTimer); clearInterval(simTimer); }
+function startTrack() {
+  stopAll(); $("simNote").hidden = true; poll.fitted = false;
+  curId = AGC.cleanId($("trip").value);
+  if (!curId) { chip("", "Enter an order ID"); return; }
+  trail.setLatLngs([]); poll(); pollTimer = setInterval(poll, 5000);
+  history.replaceState(null, "", "?trip=" + curId);
+}
+function simulate() {
+  stopAll(); $("simNote").hidden = false; trail.setLatLngs([]);
+  const pts = [];
+  for (let i = 0; i < ROUTE.length - 1; i++) {
+    const a = ROUTE[i].c, b = ROUTE[i + 1].c, n = 30;
+    for (let k = 0; k < n; k++) pts.push([a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n]);
+  }
+  pts.push(ROUTE[5].c);
+  let i = 0, drawn = [];
+  map.fitBounds(L.latLngBounds(ROUTE.map(r => r.c)), { padding: [30, 30] });
+  chip("live", "In transit (demo)");
+  simTimer = setInterval(() => {
+    const c = pts[i++]; drawn.push(c);
+    trail.setLatLngs(drawn);
+    place({ lat: c[0], lng: c[1], spd: 60 + Math.round(Math.random() * 15), t: Date.now() }, "just now");
+    if (i >= pts.length) { clearInterval(simTimer); chip("done", "Delivered (demo)"); }
+  }, 250);
+}
+$("go").onclick = startTrack; $("sim").onclick = simulate;
+const q = new URLSearchParams(location.search).get("trip");
+if (q) { $("trip").value = AGC.cleanId(q); startTrack(); }
+</script>
+</body></html>
