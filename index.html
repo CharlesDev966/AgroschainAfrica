@@ -1,265 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CipherNext Academy: Free web development, cybersecurity, web security and machine learning courses</title>
-<meta name="description" content="Learn cybersecurity, web security and machine learning from zero. Video lessons, labs and quizzes. Every beginner course is free.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CipherNext Academy">
-<meta property="og:title" content="CipherNext Academy: Learn web deveopment, Cyber, Web Security, and ML">
-<meta property="og:description" content="Video lessons, labs and quizzes. Every beginner course is free.">
-<meta property="og:url" content="https://agrochainafrica.ng/">
-<meta property="og:image" content="https://agrochainafrica.ng/og-ciphernext.png">
-<meta property="og:image:secure_url" content="https://agrochainafrica.ng/og-ciphernext.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="CipherNext Academy: Learn Cyber, Web and ML">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://agrochainafrica.ng/og-ciphernext.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CipherNext Academy: Learn Web Development, Cybersecurity and ML</title>
+<meta name="description" content="Video lessons, labs and quizzes. Every beginner course is free.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#3454EB">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','-apple-system','Segoe UI','sans-serif']},colors:{bg:'var(--bg)',card:'var(--card)',ink:'var(--ink)',muted:'var(--muted)',line:'var(--line)',brand:'var(--brand)',chip:'var(--chip)',tint:'var(--tint)'}}}}</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']},colors:{brand:'#3454EB',navy:'#0F1B4D',gold:'#F6C85A',mist:'#F4F6FF',line:'#DCE1F2',muted:'#5A6488'}}}}</script>
 <style>
-:root{--bg:#F4F6FF;--card:#fff;--ink:#0F1B4D;--muted:#5A6488;--line:#DCE1F2;--brand:#3454EB;--chip:#EBEEFB;--tint:#E4EAFF;--gold:#F6C85A;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root:not([data-theme="light"]){}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A1235;--card:#0F1B4D;--ink:#F1F3FF;--muted:#A3ADD6;--line:#243069;--brand:#8EA3FF;--chip:#18255E;--tint:#1B2B73;--gold:#F6C85A;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0A1235;--card:#0F1B4D;--ink:#F1F3FF;--muted:#A3ADD6;--line:#243069;--brand:#8EA3FF;--chip:#18255E;--tint:#1B2B73;--gold:#F6C85A;color-scheme:dark}
-html{scroll-padding-top:16px;font-size:14px}
-body{background:var(--bg);font-family:Inter,system-ui,sans-serif}
-.ok{border-color:var(--brand)!important;background:var(--tint)!important}.no{border-color:#D64545!important;background:rgba(214,69,69,.12)!important}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.fu{opacity:0}
-.fu.in{opacity:1;animation:fadeUp .7s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:var(--d,0s)}
-@media(prefers-reduced-motion:reduce){.fu{opacity:1}.fu.in{animation:none}}
-</style>
-</head>
-<body class="font-sans text-ink antialiased">
-<header class="border-b border-line bg-card">
-<div class="mx-auto flex max-w-[1240px] items-center justify-between gap-2 px-4 py-3 sm:px-8 lg:px-12">
-<a href="#top" class="flex min-w-0 items-center gap-2 sm:gap-3" aria-label="CipherNext Academy home"><img src="logo-icon.png" alt="" width="36" height="36" class="h-9 w-9 flex-none rounded-xl"><span class="leading-none"><span class="block text-[1rem] font-extrabold uppercase tracking-tight sm:text-[1.15rem]">CipherNext</span><span class="mt-1 block text-[.6rem] font-bold uppercase tracking-[.28em] text-brand sm:text-[.68rem] sm:tracking-[.32em]">Academy</span></span></a>
-<div class="flex flex-none items-center gap-1.5 sm:gap-3"><span id="who" class="hidden max-w-[160px] truncate text-sm font-semibold text-muted sm:inline"></span><button id="lo" type="button" class="hidden whitespace-nowrap rounded-lg px-3 py-2 text-sm font-bold text-muted hover:bg-chip">Sign out</button><button id="li" type="button" data-auth="login" class="hidden whitespace-nowrap rounded-lg px-3 py-2 text-sm font-bold hover:bg-chip sm:inline-block">Log in</button><button id="su" type="button" data-auth="signup" class="whitespace-nowrap rounded-lg bg-brand px-3 py-1.5 text-[.85rem] font-bold text-bg sm:px-4 sm:py-2 sm:text-sm">Sign up</button><button id="th" class="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-lg text-muted hover:bg-chip" aria-label="Toggle theme" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-<button id="mn" class="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-lg text-muted hover:bg-chip" aria-label="Menu" aria-expanded="false" type="button"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-<nav id="nv" class="hidden border-t border-line bg-card"><div class="mx-auto flex max-w-[1240px] flex-col px-4 py-2 sm:px-8 lg:px-12 text-[.95rem] font-semibold"><a class="py-3" href="#courses">Courses</a><a class="py-3" href="#progress">My progress</a><button class="py-3 text-left" id="nu" type="button">Unlock Intermediate and Advanced</button><button class="py-3 text-left sm:hidden" id="nli" type="button" data-auth="login">Log in</button><button class="hidden py-3 text-left sm:hidden" id="nlo" type="button">Sign out</button></div></nav>
-</header>
-<div id="top" class="mx-auto max-w-[1240px] px-5 pb-16 pt-8 sm:px-8 lg:px-12">
-<h1 class="mb-3 text-[clamp(1.7rem,5vw,2.4rem)] font-extrabold leading-[1.08] tracking-tight">Learn. Build. Grow.</h1>
-<p class="mb-5 max-w-[70ch] text-base text-muted">Quality tech education for the next generation of builders. Short video lessons, a quiz after every module and a hands-on project. Start from zero. All Beginner courses are free, no card needed.</p>
-<div id="hero-cta" class="mb-8 flex flex-wrap items-center gap-3"><button type="button" data-auth="signup" class="rounded-xl bg-brand px-6 py-3 font-bold text-bg">Create your free account</button><span class="text-sm text-muted">Save your progress and points on any device.</span></div>
-<div id="progress" class="mb-10 rounded-2xl border border-line bg-card p-5"><div class="font-bold">Overall progress</div><div class="mt-1 flex items-center gap-2 text-muted"><span id="pc">0 of 18 modules</span><span>·</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><span id="pp">0 Points</span></div><div class="mt-4 h-2 overflow-hidden rounded-full bg-chip"><div id="pb" class="h-full w-0 rounded-full bg-brand transition-all duration-500"></div></div></div>
-<h2 id="courses" class="mb-4 text-xl font-extrabold tracking-tight">Choose a course</h2>
-<div id="bar" class="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"></div>
-<div id="cinfo" class="mb-4 scroll-mt-4"></div>
-<main id="mods" class="grid items-start gap-3 xl:grid-cols-2"></main>
-<section class="mt-12"><h2 class="mb-3 text-xl font-extrabold">How does the learning system work?</h2><ul class="list-disc space-y-2 pl-5 text-muted"><li>Each module has an intro video, lesson videos and a project.</li><li>Pass the module quiz to earn 10 points and tick the module off.</li><li>Quizzes can be repeated, but points are only given once.</li><li>Lessons marked “Lab” are hands-on: code along on your laptop.</li><li>Beginner is free. Intermediate and Advanced lessons and quizzes need access.</li></ul></section>
-<footer class="mt-12 border-t border-line pt-6 text-sm text-muted"><div class="mb-2 flex items-center gap-2.5 text-lg font-extrabold uppercase text-ink"><img src="logo-icon.png" alt="" width="32" height="32" class="h-8 w-8 rounded-lg">CipherNext <span class="text-xs font-bold tracking-[.3em] text-brand">Academy</span></div>Free cybersecurity, web security and machine learning learning platform. © 2026 CipherNext. Brand names are used for educational purposes only.</footer>
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+.card{background:#fff;border:1px solid #DCE1F2;border-radius:1.25rem;box-shadow:0 10px 30px -12px rgba(15,27,77,.18);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -14px rgba(52,84,235,.35)}
+.btn{display:inline-block;border-radius:999px;font-weight:700;padding:.85rem 1.6rem;transition:.2s}
+.btn-p{background:#3454EB;color:#fff;box-shadow:0 10px 24px -8px rgba(52,84,235,.6)}.btn-p:hover{background:#2840c4;transform:translateY(-2px)}
+.btn-g{background:#F6C85A;color:#0F1B4D}.btn-g:hover{filter:brightness(.95);transform:translateY(-2px)}
+.fu{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.fu.in{opacity:1;transform:none}
+@keyframes fl{50%{transform:translateY(-10px)}}.fl{animation:fl 5s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.fu{opacity:1;transform:none;transition:none}.fl{animation:none}}
+</style></head>
+<body class="bg-white font-sans text-navy antialiased">
+
+<header class="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
+<div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3">
+<a href="#top" class="flex items-center gap-2.5"><img src="logo-icon.png" alt="" width="36" height="36" class="h-9 w-9 rounded-xl"><span class="leading-none"><span class="block font-extrabold uppercase tracking-tight">CipherNext</span><span class="mt-1 block text-[.6rem] font-bold uppercase tracking-[.3em] text-brand">Academy</span></span></a>
+<nav class="hidden gap-7 text-sm font-semibold md:flex"><a href="#top" class="hover:text-brand">Home</a><a href="#courses" class="hover:text-brand">Courses</a><a href="#subjects" class="hover:text-brand">Subjects</a><a href="#why" class="hover:text-brand">About</a><a href="#contact" class="hover:text-brand">Contact</a></nav>
+<div class="flex items-center gap-2"><a href="login.html" class="px-3 py-2 text-sm font-bold hover:text-brand">Login</a><a href="login.html?mode=signup" class="rounded-full bg-brand px-4 py-2 text-sm font-bold text-white hover:bg-[#2840c4]">Learn</a></div>
+</div></header>
+
+<main id="top">
+<section class="relative overflow-hidden bg-mist">
+<div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-2 md:py-20">
+<div class="fu">
+<h1 class="text-[clamp(2.2rem,6vw,3.6rem)] font-extrabold leading-[1.05] tracking-tight">Turn Your Learning Idea Into Reality</h1>
+<p class="mt-3 text-[clamp(1.8rem,4.5vw,2.6rem)] font-extrabold text-brand">CipherNext</p>
+<p class="mt-4 max-w-md text-lg text-muted">Build confidence and skills with online courses in web development, cybersecurity and machine learning. Start from zero.</p>
+<div class="mt-7 flex flex-wrap gap-3"><a href="login.html?mode=signup" class="btn btn-p">Start Learning</a><a href="#courses" class="btn border border-line bg-white">Browse courses</a></div>
+<p class="mt-4 text-sm font-semibold text-muted">All Beginner courses are free. No card needed.</p>
 </div>
+<div class="fu relative mx-auto w-full max-w-sm" style="transition-delay:.15s">
+<div class="card fl overflow-hidden p-3">
+<div class="grid place-items-center rounded-2xl bg-navy py-12"><img src="logo-icon.png" alt="CipherNext logo" width="150" height="150" class="h-36 w-36 rounded-3xl"></div>
+<a href="login.html?mode=signup" class="btn btn-p mt-3 block text-center">Choose your course</a>
+</div>
+<div class="card absolute -left-4 top-8 hidden px-4 py-2.5 text-sm font-bold sm:block">🎓 18 modules</div>
+<div class="card absolute -right-4 bottom-24 hidden px-4 py-2.5 text-sm font-bold sm:block">⭐ +10 points per quiz</div>
+</div>
+</div></section>
 
-<dialog id="vd" class="w-[calc(100%-24px)] max-w-[720px] rounded-2xl border border-line bg-card p-0 text-ink backdrop:bg-slate-900/70"><div class="relative p-4"><button class="absolute right-3 top-1.5 text-[1.6rem] leading-none text-muted" id="vx" type="button" aria-label="Close">×</button><h2 class="mb-3 mr-7 font-bold" id="vt"></h2><video class="aspect-video w-full rounded-xl bg-black" id="vv" controls playsinline preload="metadata"></video><p class="mt-3 hidden text-muted" id="vs">This video is coming soon. Check back shortly.</p></div></dialog>
+<section id="subjects" class="mx-auto max-w-6xl px-5 py-12">
+<div class="fu grid overflow-hidden rounded-2xl shadow-lg sm:grid-cols-2 lg:grid-cols-4">
+<a href="login.html?mode=signup" class="bg-brand p-7 text-center text-white transition hover:brightness-110"><svg class="mx-auto mb-3" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg><b>Web Development</b></a>
+<a href="login.html?mode=signup" class="bg-navy p-7 text-center text-white transition hover:brightness-125"><svg class="mx-auto mb-3" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><b>Cybersecurity</b></a>
+<a href="login.html?mode=signup" class="bg-gold p-7 text-center text-navy transition hover:brightness-95"><svg class="mx-auto mb-3" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Web Security</b></a>
+<a href="login.html?mode=signup" class="bg-[#EBEEFB] p-7 text-center text-brand transition hover:bg-[#E0E6FB]"><svg class="mx-auto mb-3" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6h8M7 8l4 8M17 8l-4 8"/></svg><b>Machine Learning</b></a>
+</div></section>
 
-<dialog id="pay" class="w-[calc(100%-24px)] max-w-[520px] rounded-2xl border border-line bg-card p-0 text-ink backdrop:bg-slate-900/70"><div class="relative max-h-[88vh] overflow-y-auto p-5"><button class="absolute right-3 top-1.5 text-[1.6rem] leading-none text-muted" id="px" type="button" aria-label="Close">×</button>
-<h2 class="mb-1 pr-7 text-xl font-extrabold">Unlock Intermediate and Advanced</h2><p class="mb-4 text-muted">₦30,000 per month. Lessons and quizzes for every Intermediate and Advanced module.</p>
-<div class="mb-4 rounded-xl bg-tint p-3.5 text-[.92rem]"><b>Pay to:</b><div id="bank" class="mt-1"></div></div>
-<div class="mb-4 grid gap-2"><input id="fn" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Full name"><input id="em" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Email" type="email"><input id="ph" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Phone"><input id="sn" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Sending account name"><input id="rf" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Transfer time or reference"></div>
-<textarea id="msg" class="mb-2 h-32 w-full rounded-lg border border-line bg-bg p-3 text-sm" readonly></textarea><p id="ct" class="mb-3 text-sm text-muted"></p>
-<div class="mb-5 flex flex-wrap gap-2"><button id="cm" class="rounded-lg bg-chip px-4 py-2 text-sm font-bold" type="button">Copy message</button><a id="wa" hidden target="_blank" rel="noopener" class="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-white">WhatsApp</a><a id="ml" hidden class="rounded-lg bg-chip px-4 py-2 text-sm font-bold">Email</a></div>
-<div class="border-t border-line pt-4"><label class="mb-1 block font-bold" for="code">Already have a code?</label><div class="flex gap-2"><input id="code" class="min-w-0 flex-1 rounded-lg border border-line bg-bg px-3 py-2 uppercase" placeholder="Access code" autocomplete="off"><button id="ub" class="rounded-lg bg-brand px-4 py-2 font-bold text-white" type="button">Unlock</button></div><p id="er" class="mt-2 text-sm font-semibold text-[#D64545]"></p></div></div></dialog>
+<section class="mx-auto max-w-6xl px-5 py-10">
+<div class="fu grid items-center gap-8 rounded-3xl bg-navy p-8 text-white md:grid-cols-[auto_1fr] md:p-12">
+<div class="mx-auto grid w-52 -rotate-3 grid-cols-2 gap-2 rounded-3xl bg-brand p-4 shadow-2xl"><div class="col-span-2 mb-1 text-center text-sm font-extrabold">Module Quiz<div class="text-[.65rem] font-medium opacity-80">Join the leaderboard</div></div>
+<span class="grid h-20 place-items-center rounded-xl bg-gold text-3xl font-extrabold text-navy">A</span><span class="grid h-20 place-items-center rounded-xl bg-white text-3xl font-extrabold text-brand">B</span><span class="grid h-20 place-items-center rounded-xl bg-white text-3xl font-extrabold text-brand">C</span><span class="grid h-20 place-items-center rounded-xl bg-gold text-3xl font-extrabold text-navy">D</span></div>
+<div class="text-center md:text-left"><h2 class="text-3xl font-extrabold md:text-4xl">Join The Challenge</h2><p class="mt-1 text-xl font-bold text-gold">Build your strength</p><p class="mt-3 max-w-md text-[#C9D1F5]">Pass each module quiz to earn 10 points and tick the module off. Retake any time.</p><a href="login.html?mode=signup" class="btn btn-g mt-6">Accept the challenge</a></div>
+</div></section>
 
-<dialog id="auth" class="w-[calc(100%-24px)] max-w-[440px] rounded-2xl border border-line bg-card p-0 text-ink backdrop:bg-slate-900/70"><div class="relative p-5"><button class="absolute right-3 top-1.5 text-[1.6rem] leading-none text-muted" id="ax" type="button" aria-label="Close">×</button>
-<h2 id="at" class="mb-1 pr-7 text-xl font-extrabold">Create your free account</h2><p id="as" class="mb-4 text-muted">Save your progress and points on any device.</p>
-<div class="mb-4 grid grid-cols-2 gap-1 rounded-xl bg-chip p-1 text-sm font-bold" role="tablist"><button type="button" role="tab" id="tab-signup" data-tab="signup" class="rounded-lg py-2">Sign up</button><button type="button" role="tab" id="tab-login" data-tab="login" class="rounded-lg py-2">Log in</button></div>
-<div id="af" class="grid gap-2"><input id="a-name" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Full name" autocomplete="name"><input id="a-email" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Email" type="email" autocomplete="email"><input id="a-pass" class="rounded-lg border border-line bg-bg px-3 py-2" placeholder="Password (8+ characters)" type="password" autocomplete="new-password" minlength="8"><button id="a-go" type="button" class="mt-1 rounded-lg bg-brand px-4 py-2.5 font-bold text-bg">Create account</button></div>
-<p id="a-msg" class="mt-3 min-h-[1.25rem] text-sm font-semibold" role="status"></p>
-<button id="a-forgot" type="button" class="mt-1 hidden text-sm font-semibold text-brand">Forgot your password?</button></div></dialog>
+<section id="courses" class="mx-auto max-w-6xl px-5 py-14">
+<h2 class="fu mb-10 text-center text-3xl font-extrabold">Discover Courses</h2>
+<div class="grid gap-6 sm:grid-cols-3">
+<a href="login.html?mode=signup" class="card fu block -rotate-2 bg-navy p-7 text-white hover:rotate-0" style="background:#0F1B4D"><div class="mb-12 text-4xl">💻</div><h3 class="text-xl font-extrabold">Web Development</h3><p class="mt-1 text-sm text-[#C9D1F5]">HTML, CSS, JavaScript, React, Node, deployment.</p><span class="mt-4 inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-bold">Beginner is free</span></a>
+<a href="login.html?mode=signup" class="card fu block bg-brand p-7 text-white sm:-translate-y-3" style="background:#3454EB;transition-delay:.1s"><div class="mb-12 text-4xl">🛡️</div><h3 class="text-xl font-extrabold">Cybersecurity</h3><p class="mt-1 text-sm text-[#DCE4FF]">The CIA triad, threats, defence and hands-on labs.</p><span class="mt-4 inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-bold">Beginner is free</span></a>
+<a href="login.html?mode=signup" class="card fu block rotate-2 p-7 hover:rotate-0" style="background:#F6C85A;transition-delay:.2s"><div class="mb-12 text-4xl">🤖</div><h3 class="text-xl font-extrabold">Machine Learning</h3><p class="mt-1 text-sm text-navy/70">Data, models and projects, from zero.</p><span class="mt-4 inline-block rounded-full bg-navy/10 px-3 py-1 text-xs font-bold">Beginner is free</span></a>
+</div></section>
 
+<section id="why" class="bg-mist py-14"><div class="mx-auto max-w-6xl px-5">
+<h2 class="fu mb-10 text-center text-3xl font-extrabold">Why Choose Us</h2>
+<div class="grid gap-5 sm:grid-cols-2">
+<div class="card fu flex items-center gap-4 p-6"><span class="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-brand text-2xl text-white">✔</span><div><b class="text-lg">Quality Education</b><p class="text-sm text-muted">Short video lessons, labs and a project in every module.</p></div></div>
+<div class="card fu flex items-center gap-4 p-6"><span class="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-gold text-2xl">🖥️</span><div><b class="text-lg">Expert Instructors</b><p class="text-sm text-muted">Practical, real-world skills from working developers.</p></div></div>
+<div class="card fu flex items-center gap-4 p-6"><span class="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-navy text-2xl text-white">📣</span><div><b class="text-lg">Trusted Platform</b><p class="text-sm text-muted">Your progress and points sync across every device.</p></div></div>
+<div class="card fu flex items-center gap-4 p-6"><span class="grid h-14 w-14 flex-none place-items-center rounded-2xl bg-brand text-2xl text-white">💬</span><div><b class="text-lg">Responsive Support</b><p class="text-sm text-muted">Stuck? Reach us on WhatsApp or email any time.</p></div></div>
+</div></div></section>
+
+<section class="mx-auto max-w-6xl px-5 py-14">
+<h2 class="fu mb-10 text-center text-3xl font-extrabold text-brand">Testimonials</h2>
+<div class="grid gap-5 md:grid-cols-3">
+<figure class="card fu p-6 text-center"><span class="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand text-lg font-extrabold text-white">JS</span><figcaption class="font-bold">John Smith</figcaption><blockquote class="mt-2 text-sm text-muted">“The lessons are short, clear and practical. I built my first site in a week.”</blockquote></figure>
+<figure class="card fu p-6 text-center" style="transition-delay:.1s"><span class="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-gold text-lg font-extrabold">EJ</span><figcaption class="font-bold">Emily Johnson</figcaption><blockquote class="mt-2 text-sm text-muted">“The quizzes keep me motivated. Earning points makes studying fun.”</blockquote></figure>
+<figure class="card fu p-6 text-center" style="transition-delay:.2s"><span class="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-navy text-lg font-extrabold text-white">MB</span><figcaption class="font-bold">Michael Brown</figcaption><blockquote class="mt-2 text-sm text-muted">“Great range of courses. The security labs were my favourite part.”</blockquote></figure>
+</div></section>
+
+<section class="mx-auto max-w-6xl px-5 pb-14 text-center">
+<h2 class="fu text-3xl font-extrabold">Join 10k+ Learners</h2>
+<div class="fu mt-8 flex justify-center gap-5 text-5xl"><span class="fl grid h-20 w-20 place-items-center rounded-3xl bg-brand/10">🧑🏾‍💻</span><span class="fl grid h-20 w-20 place-items-center rounded-3xl bg-gold/30" style="animation-delay:.6s">▶️</span><span class="fl grid h-20 w-20 place-items-center rounded-3xl bg-navy/10" style="animation-delay:1.2s">💬</span></div>
+<a href="login.html?mode=signup" class="btn btn-p mt-8">Create your free account</a>
+</section>
+</main>
+
+<footer id="contact" class="px-5 pb-8"><div class="mx-auto grid max-w-6xl gap-8 rounded-3xl bg-brand p-8 text-white sm:grid-cols-3 md:p-10">
+<div><b class="text-sm tracking-widest">ABOUT US</b><p class="mt-3 text-sm text-[#DCE4FF]">CipherNext Academy is an online learning platform built to help students master in-demand tech skills at their own pace.</p></div>
+<div><b class="text-sm tracking-widest">QUICK LINKS</b><ul class="mt-3 space-y-1.5 text-sm text-[#DCE4FF]"><li><a href="#courses" class="hover:text-white">Courses</a></li><li><a href="#why" class="hover:text-white">Why CipherNext</a></li><li><a href="login.html" class="hover:text-white">Login</a></li><li><a href="login.html?mode=signup" class="hover:text-white">Sign up</a></li></ul></div>
+<div><b class="text-sm tracking-widest">CONTACT US</b><ul class="mt-3 space-y-1.5 text-sm text-[#DCE4FF]"><li>support@ciphernext.academy</li><li>Uyo, Akwa Ibom, Nigeria</li></ul></div>
+<p class="border-t border-white/20 pt-5 text-xs text-[#DCE4FF] sm:col-span-3">© 2026 CipherNext Academy. Learn. Build. Grow.</p>
+</div></footer>
 <script>
-/* Add video links: key = "c{course}m{module}l{lesson}", counting from 0. Example: "c0m0l0":"https://yourcdn.com/intro.mp4" */
-var VIDEOS={"c0m0l0":"c0m0l0.mp4"};
-var C=[{"n":"Web Development","c":"#3454EB","m":[["Beginner","HTML and CSS Foundations",["How the web works: browsers, servers, URLs","HTML structure, text, links and images","CSS: colors, spacing and the box model","Flexbox and responsive layouts|Lab"],"Build and publish your own one-page profile site."],["Beginner","JavaScript Essentials",["Variables, functions and logic","The DOM and handling clicks|Lab","Arrays, objects and JSON","Fetching data from an API|Lab"],"Build a to-do list or tip calculator that saves your data."],["Intermediate","Modern Front-End with React",["Components and props","State and hooks|Lab","Routing and forms","Calling APIs and handling errors|Lab"],"Build a multi-page React app with live data."],["Intermediate","Back-End with Node and Databases",["Node.js and Express basics|Lab","REST APIs and routes","SQL and database design|Lab","Login with sessions and JWT"],"Build a REST API with a database and user accounts."],["Advanced","Full-Stack Projects and Git",["Git and GitHub workflow|Lab","Connecting front end and back end","Testing and debugging","Performance and accessibility"],"Ship a full-stack app with a team-style Git workflow."],["Advanced","Deployment and Launch",["Domains, DNS and hosting","Deploying on Vercel, Render or GitHub Pages|Lab","Environment variables and secrets","Capstone: launch and present your product"],"Launch a live product with your own domain."]]},{"n":"Cybersecurity","c":"#12805C","m":[["Beginner","Cybersecurity Foundations",["What cybersecurity is and who the attackers are","The CIA triad: confidentiality, integrity, availability","Phishing, malware and ransomware","Passwords, 2FA and account safety|Lab"],"Secure all your own accounts with a checklist."],["Beginner","Network and Device Basics",["How the internet, IPs and DNS work","Firewalls, VPNs and safe Wi-Fi","Locking down phones and laptops|Lab","Spotting scams: SIM swap, fake alerts, fake job offers"],"Audit your home network and write a one-page report."],["Intermediate","Linux and Networking for Defenders",["The Linux command line|Lab","Reading packets with Wireshark|Lab","Finding open ports with Nmap|Lab","Logs and monitoring"],"Scan a practice network and report what you find."],["Intermediate","Threats and Incident Response",["The attack lifecycle and MITRE ATT&CK","Malware analysis basics","Triaging alerts like a SOC analyst|Lab","Writing an incident report"],"Investigate a simulated breach from start to finish."],["Advanced","Pentesting and Hardening",["Recon and enumeration|Lab","Exploiting known weaknesses in a safe lab|Lab","Privilege escalation basics","Hardening servers and cloud accounts"],"Full pentest report on a practice machine."],["Advanced","AI Security",["How AI systems get attacked: OWASP LLM Top 10","Prompt injection and jailbreaks|Lab","Data poisoning and model theft","Securing AI apps and agents"],"Red-team a chatbot, then fix what you break."]]},{"n":"Web Security","c":"#2B55F5","m":[["Beginner","How the Web Works: A Security View",["HTTP, cookies and sessions","Browser DevTools for investigators|Lab","HTTPS and certificates","Why websites get hacked"],"Inspect and map every request a real site makes."],["Beginner","Secure Coding Basics",["Never trust user input","Password hashing and safe forms|Lab","Keeping secrets out of your code","Asking Claude to review your code for security|Lab"],"Build a login form that holds up to basic attacks."],["Intermediate","Injection and XSS",["SQL injection|Lab","Cross-site scripting (XSS)|Lab","CSRF and how tokens stop it","Fixing and preventing all three"],"Break, then patch, a deliberately vulnerable app."],["Intermediate","Auth, Sessions and APIs",["Login flows done right","JWT mistakes to avoid","Broken access control|Lab","API security and rate limiting"],"Secure a small REST API end to end."],["Advanced","Bug Bounty and Web Pentesting",["Burp Suite essentials|Lab","Recon and finding targets","Writing reports that get paid","Legal and ethical hunting"],"Submit a practice bug report."],["Advanced","Securing Production",["Security headers and CSP","Deploying behind a WAF","Dependency and supply-chain risk","Monitoring and alerts"],"Harden and deploy a live app."]]},{"n":"Machine Learning","c":"#6D3FD1","m":[["Beginner","AI and ML Foundations",["AI vs machine learning vs deep learning","Python basics for ML|Lab","Free GPUs with Google Colab|Lab","Understanding and cleaning data|Lab"],"Clean a messy real-world dataset."],["Beginner","Your First Models",["Regression: predicting numbers","Classification: predicting categories","Train/test split and measuring results","Build a predictor with Claude’s help|Lab"],"House price predictor."],["Intermediate","Core ML with scikit-learn",["Feature engineering|Lab","Decision trees and random forests","Overfitting and cross-validation","Pipelines|Lab"],"Customer churn model."],["Intermediate","Neural Networks and Deep Learning",["How a neural network learns","PyTorch basics|Lab","Image classification|Lab","Text and embeddings"],"Image classifier you can demo."],["Advanced","LLMs and Applications",["How transformers work","Prompting and RAG|Lab","Fine-tuning a model","Evaluating LLM apps"],"Chatbot that answers from your own documents."],["Advanced","MLOps and Deployment",["Serving a model through an API|Lab","Docker for ML","Monitoring and model drift","Capstone planning"],"Deploy a model as a live web service."]]}];
-/* Quizzes: one entry per module in course order. Each question: [text,[A,B,C,D],correctIndex] */
-var QZ=[[["Which HTML tag creates a link?",["<a>","<p>","<img>","<div>"],0],["Which CSS property adds space inside an element's border?",["margin","padding","gap","float"],1]],[["What does the DOM represent?",["The page as a tree JavaScript can change","A CSS file","A server","A database"],0],["JSON is mostly used to...",["Compile code","Draw images","Send and store structured data","Style pages"],2]],[["In React, state is...",["A CSS rule","A file type","Data that changes and updates the UI","A server"],2],["Props are used to...",["Deploy an app","Style a page","Query a database","Pass data into a component"],3]],[["Express is a...",["Database","Node.js web framework","Browser","CSS library"],1],["Why use parameterized SQL queries?",["To look nicer","To style tables","To save disk","To prevent SQL injection"],3]],[["Which Git command saves your changes locally?",["git clone","git pull","git push","git commit"],3],["Accessibility means...",["Your site is pretty","Your site works for everyone, including assistive tech","Your site is free","Your site is fast"],1]],[["Where should secrets like API keys be stored?",["Environment variables","In public repos","In the HTML","In comments"],0],["What does DNS do?",["Builds CSS","Maps a domain name to a server address","Encrypts passwords","Compresses images"],1]],[["What does the CIA triad stand for?",["Contain, Isolate, Alert","Confidentiality, Integrity, Availability","Control, Identify, Authorize","Cyber, Internet, Access"],1],["Which is the strongest protection for an account?",["Same password everywhere","Your birthday","Password written in email","A long unique password plus 2FA"],3]],[["Which tool translates domain names into IP addresses?",["DHCP","DNS","NAT","VPN"],1],["A text says your SIM must be updated today via a link. Best action?",["Forward to friends","Reply with your PIN","Click quickly","Ignore it and call your network provider"],3]],[["Which command lists files in a Linux folder?",["rm","ls","cd","mv"],1],["What does Nmap mainly find?",["Weather","Passwords in email","Open ports and services","Typing errors"],2]],[["MITRE ATT&CK is a...",["Knowledge base of attacker tactics and techniques","Password manager","Firewall brand","Antivirus tool"],0],["What should an incident report always include?",["Nothing technical","Timeline and impact","Jokes","Only the attacker's name"],1]],[["What is the first phase of a pentest?",["Deleting logs","Selling findings","Reconnaissance and scoping","Exploitation without permission"],2],["Pentesting is legal only when...",["It is a weekend","You use a VPN","The site is small","You have written permission"],3]],[["Prompt injection is when...",["Data is encrypted","Input tricks an AI into ignoring its instructions","A GPU overheats","A model is too large"],1],["Data poisoning attacks target...",["DNS records","The power supply","Screen brightness","Training data"],3]],[["Which protocol secures web traffic?",["SMTP","Telnet","HTTPS","FTP"],2],["Cookies are mainly used to...",["Speed up the CPU","Block ads","Keep session state","Encrypt disks"],2]],[["Best way to store passwords?",["Plain text","Email them","Base64","Hash with a salted slow algorithm"],3],["Where should API keys live?",["In environment variables, not in code","In public GitHub","In the HTML","In comments"],0]],[["SQL injection works because...",["Input is mixed into queries unsafely","CSS is broken","Servers are slow","Cookies expire"],0],["Best fix for SQL injection?",["Hide the form","Parameterized queries","Longer passwords","Bigger server"],1]],[["JWT mistake to avoid?",["Verifying signatures","Accepting unsigned tokens","Short expiry","Using HTTPS"],1],["Broken access control means...",["Images fail","The site is slow","Login is pretty","Users can reach data they should not"],3]],[["Burp Suite is used to...",["Intercept and test web requests","Host websites","Edit photos","Write emails"],0],["A good bug report includes...",["Only a screenshot","Clear steps to reproduce","Nothing","Threats"],1]],[["What does a CSP header do?",["Creates backups","Speeds up images","Stores cookies","Limits what scripts and resources a page can load"],3],["A WAF sits...",["On the user's phone","In front of your app filtering bad requests","Under the router","Inside your database"],1]],[["Deep learning is a subset of...",["Networking","Machine learning","Databases","Hardware"],1],["Google Colab gives you...",["A domain","A phone","A VPN","Free notebooks with GPUs"],3]],[["Predicting a house price is...",["Regression","Classification","Encryption","Clustering"],0],["Why split data into train and test?",["To check the model on unseen data","To save disk space","To make it faster","To hide data"],0]],[["Overfitting means...",["A slow GPU","Too little data","A typo","Great on training data, poor on new data"],3],["Cross-validation helps you...",["Delete outliers","Estimate real-world performance","Rename columns","Draw charts"],1]],[["A neural network learns by...",["Random guessing","Memorizing labels only","Deleting layers","Adjusting weights to reduce error"],3],["PyTorch is a...",["Deep learning library","Browser","Database","Firewall"],0]],[["RAG stands for...",["Real Agent Gateway","Random Access Graph","Retrieval-Augmented Generation","Rapid AI Growth"],2],["Transformers rely on...",["Sorting","Hashing","Attention","Compression"],2]],[["Model drift means...",["The file moves","GPU fails","Performance decays as real data changes","Code is longer"],2],["Docker helps ML deployment by...",["Training faster","Labeling images","Packaging code and dependencies together","Cleaning data"],2]]];
-var SLUG=["web-development","cybersecurity","web-security","machine-learning"];
-var LOCK='<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg>';
-var PLAY='<svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
-var root=document.getElementById("mods"),bar=document.getElementById("bar"),cinfo=document.getElementById("cinfo");
-var DONE={};try{DONE=JSON.parse(localStorage.getItem("cn-done")||"{}")}catch(e){}
-var TOTAL=0;C.forEach(function(c){TOTAL+=c.m.length});
-function saveDone(){try{localStorage.setItem("cn-done",JSON.stringify(DONE))}catch(e){}}
-function refresh(){var n=Object.keys(DONE).length;document.getElementById("pc").textContent=n+" of "+TOTAL+" modules";document.getElementById("pp").textContent=(n*10)+" Points";document.getElementById("pb").style.width=(n/TOTAL*100)+"%";
-document.querySelectorAll("[data-tick]").forEach(function(t){t.classList.toggle("hidden",!DONE[t.dataset.tick])})}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.setAttribute("data-in","");io.unobserve(e.target)}})},{threshold:.05});
-C.forEach(function(c,ci){
-var n=0;c.m.forEach(function(m){n+=m[2].length});
-bar.insertAdjacentHTML("beforeend",'<button type="button" data-c="'+ci+'" aria-pressed="false" class="group overflow-hidden rounded-2xl border border-line bg-card text-left transition aria-pressed:border-brand aria-pressed:ring-2 aria-pressed:ring-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand"><img src="'+SLUG[ci]+'.png" alt="'+c.n+' course thumbnail" width="1280" height="720" loading="'+(ci?'lazy':'eager')+'" class="aspect-video w-full object-cover"><div class="p-3.5"><div class="font-bold">'+c.n+'</div><div class="text-sm text-muted">'+c.m.length+' modules · '+n+' video lessons</div></div></button>');
-c.m.forEach(function(m,mi){
-var fr=m[0]==="Beginner",id="c"+ci+"m"+mi,d=document.createElement("details");d.dataset.c=ci;d.id=id;d.style.display="none";
-d.className="group translate-y-6 rounded-2xl border border-line bg-card opacity-0 transition duration-500 data-[in]:translate-y-0 data-[in]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none";
-var ls=m[2].map(function(x,j){var p=x.split("|");
-var tg=p[1]?'<span class="rounded-md bg-chip px-2 py-0.5 text-xs font-bold text-brand">Lab</span>':'';
-return '<li class="flex cursor-pointer items-start gap-3 border-t border-line py-2.5 text-[.95rem] hover:bg-chip focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand'+(fr?'':' lk text-muted [.unlocked_&]:text-ink')+'" tabindex="0" role="button" data-v="'+id+'l'+j+'" data-t="'+p[0]+'" data-free="'+(fr?1:0)+'"><span class="mt-px grid h-[26px] w-[26px] flex-none place-items-center rounded-full bg-chip text-brand">'+(fr?PLAY:'<span class="[.unlocked_&]:hidden">'+LOCK+'</span><span class="hidden [.unlocked_&]:inline">'+PLAY+'</span>')+'</span><span>'+p[0]+'</span><span class="ml-auto flex-none">'+tg+'</span></li>'}).join("");
-d.innerHTML='<summary class="flex cursor-pointer list-none flex-wrap items-center gap-3 p-4 [&::-webkit-details-marker]:hidden"><span class="min-w-0 flex-1"><div class="text-[1.05rem] font-bold leading-tight">'+m[1]+'</div><div class="mt-0.5 text-sm text-muted">Module '+(mi+1)+' · '+m[2].length+' videos · quiz · project</div></span><span data-tick="'+id+'" class="hidden rounded-full bg-tint px-2.5 py-0.5 text-xs font-bold text-brand">Done</span><span class="rounded-full border border-line bg-chip px-3 py-0.5 text-xs font-semibold">'+m[0]+(fr?' · Free':'')+'</span><span class="text-muted transition-transform group-open:rotate-90">›</span></summary><div class="px-[18px] pb-[18px]"><ol class="m-0 list-none p-0">'+ls+'</ol><div class="mt-3 rounded-xl bg-chip px-3.5 py-3 text-[.92rem]"><b class="text-brand">Module project:</b> '+m[3]+'</div><div class="mt-4 rounded-xl border border-line"><div class="flex items-center gap-2 rounded-t-xl bg-chip px-4 py-3 font-bold"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--brand)" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Module quiz</div><div class="p-4" data-quiz="'+id+'" data-free="'+(fr?1:0)+'"></div></div></div>';
-root.appendChild(d);io.observe(d);quiz(d.querySelector("[data-quiz]"),ci*100+mi,id)})});
-function info(ci){var c=C[ci];cinfo.innerHTML='<h2 class="text-xl font-extrabold tracking-tight">'+c.n+'</h2><p class="text-muted">Pick a module, watch the videos, then pass the quiz.</p>'}
-cinfo.innerHTML='<p class="rounded-2xl border border-dashed border-line p-5 text-center text-muted">Tap a course above to see its modules, videos and quizzes.</p>';
-bar.addEventListener("click",function(e){var b=e.target.closest("[data-c]");if(!b)return;
-var on=b.getAttribute("aria-pressed")==="true",pick=on?-1:+b.dataset.c;
-bar.querySelectorAll("[data-c]").forEach(function(x){x.setAttribute("aria-pressed",+x.dataset.c===pick)});
-if(pick<0){cinfo.innerHTML='<p class="rounded-2xl border border-dashed border-line p-5 text-center text-muted">Tap a course above to see its modules, videos and quizzes.</p>'}else{info(pick)}
-root.querySelectorAll("details").forEach(function(d){d.style.display=+d.dataset.c===pick?"":"none"});
-if(pick>=0){var rm=matchMedia("(prefers-reduced-motion:reduce)").matches;cinfo.scrollIntoView({behavior:rm?"auto":"smooth",block:"start"})}});
-/* quiz */
-function quiz(box,key,id){var flat=[];C.forEach(function(c,ci){c.m.forEach(function(m,mi){flat.push(ci+"-"+mi)})});
-var qs=QZ[flat.indexOf(Math.floor(key/100)+"-"+key%100)]||[],i=0,sc=0;
-function locked(){return box.dataset.free!=="1"&&!document.body.classList.contains("unlocked")}
-function start(){i=0;sc=0;if(locked()){box.innerHTML='<p class="mb-3 text-muted">'+qs.length+' questions. Unlock Intermediate and Advanced to take this quiz.</p><button type="button" data-pay="1" class="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2 font-bold text-bg">'+LOCK+' Unlock quiz</button>';return}
-box.innerHTML='<p class="mb-3 text-muted">'+qs.length+' questions. Get them all right to finish the module and earn 10 points.</p><button type="button" class="rounded-lg bg-brand px-4 py-2 font-bold text-white" data-go>Start quiz</button>';box.querySelector("[data-go]").onclick=show}
-function show(){var q=qs[i];box.innerHTML='<div class="mb-2 text-sm text-muted">Question '+(i+1)+' / '+qs.length+'</div><div class="mb-3 font-semibold">'+q[0]+'</div><div class="grid gap-2">'+q[1].map(function(o,k){return '<button type="button" data-k="'+k+'" class="flex items-center gap-3 rounded-xl border-[1.5px] border-line bg-card px-3 py-2.5 text-left hover:bg-chip"><span class="grid h-8 w-8 flex-none place-items-center rounded-full border border-line text-sm font-bold text-muted">'+"ABCD"[k]+'</span><span>'+o+'</span></button>'}).join("")+'</div><div class="mt-3 hidden" data-nx><button type="button" class="rounded-lg bg-ink px-4 py-2 font-bold text-bg">'+(i<qs.length-1?'Next':'See result')+'</button></div>';
-box.querySelectorAll("[data-k]").forEach(function(b){b.onclick=function(){if(box.dataset.a)return;box.dataset.a=1;var k=+b.dataset.k;if(k===q[2])sc++;
-box.querySelectorAll("[data-k]").forEach(function(x){if(+x.dataset.k===q[2])x.classList.add("ok");else if(x===b)x.classList.add("no")});
-var nx=box.querySelector("[data-nx]");nx.classList.remove("hidden");nx.querySelector("button").onclick=function(){delete box.dataset.a;i++;i<qs.length?show():end()}}})}
-function end(){var pass=sc===qs.length,first=pass&&!DONE[id];if(pass){DONE[id]=1;saveDone();refresh()}
-box.innerHTML='<div class="mb-1 text-lg font-extrabold">'+(pass?'Module complete!':'Not quite yet')+'</div><p class="mb-3 text-muted">You got '+sc+' of '+qs.length+' right.'+(first?' +10 points earned.':'')+(pass?'':' Rewatch the videos and try again.')+'</p><button type="button" class="rounded-lg bg-chip px-4 py-2 font-bold" data-r>Retake quiz</button>';box.querySelector("[data-r]").onclick=start}
-box._reset=start;start()}
-refresh();
-var vd=document.getElementById("vd"),vv=document.getElementById("vv");
-function play(li){var u=VIDEOS[li.dataset.v];document.getElementById("vt").textContent=li.dataset.t;document.getElementById("vs").classList.toggle("hidden",!!u);vv.classList.toggle("hidden",!u);if(u){vv.src=u}else{vv.removeAttribute("src")}vd.showModal()}
-function shut(){vv.pause();vd.close()}
-document.getElementById("vx").onclick=shut;vd.addEventListener("click",function(e){if(e.target===vd)shut()});
-function go(li){if(li&&(li.dataset.free==="1"||document.body.classList.contains("unlocked")))play(li)}
-root.addEventListener("click",function(e){go(e.target.closest("li[data-v]"))});
-root.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){var li=e.target.closest&&e.target.closest("li[data-v]");if(li&&li===e.target){e.preventDefault();go(li)}}});
-/* theme + menu */
-var R=document.documentElement;try{var t=localStorage.getItem("cn-theme");if(t)R.setAttribute("data-theme",t)}catch(e){}
-document.getElementById("th").onclick=function(){var dk=R.getAttribute("data-theme")?R.getAttribute("data-theme")==="dark":matchMedia("(prefers-color-scheme:dark)").matches;var n=dk?"light":"dark";R.setAttribute("data-theme",n);try{localStorage.setItem("cn-theme",n)}catch(e){}};
-var mn=document.getElementById("mn"),nv=document.getElementById("nv");mn.onclick=function(){var o=nv.classList.toggle("hidden");mn.setAttribute("aria-expanded",!o)};
-nv.addEventListener("click",function(e){if(e.target.closest("a,button"))nv.classList.add("hidden")});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll(".fu").forEach(function(e){io.observe(e)});
 </script>
-<script>
-(function(){
-var CFG={whatsapp:"",email:"",bank:"Add your bank name, account name and account number in CFG.bank"};/* owner: WhatsApp with country code e.g. 2348012345678, an email, and your bank details */
-var H=["c3120fc1ffcf5e179ddd051c89113fdc80b07fd438f4711443c567cd25d09304", "6344b322856c743ef362c98e7928f682749e881de312de031a29028b5aaca1d3", "c66a06a82c4d13d3544fab7e0bf7ff863523f3e98df40ccec2984706e8608581", "d10396dcc4dd72d64c9535510dfe7047377675af573c577aa362d4a23fcf99a8", "8b058842997273a3f6b527cb48384083120a018840e9936ec96f183005ea14de", "5b1a2b52634500e47b517b331beec0e674b4a7815db361d47771c303bda97aec", "e9bdda85766ed0a080b8b7aec1f22fa1f12c545fd4297e9a1ca49caaad4c789c", "33954cb4ab6ebf772b86d546bc38714db59184ed4675094e71e74f7ad2a25b6f", "87e30c7809c3c6be86780344cc6523dbd1e1a847d3835a469c65fb098c3b6bfc", "f4f66180a15ff00ec1178ec60a91f2b51b88ab01ceddb1e68a98a302b3e10559", "45405725017cc2ebe6b3a083b4a4c1be9964b4d86b14cbc34c8a7c7a8c1d2af7", "079cc5f49486c88335f7846bbde111d1f8d4b4d9f2e4334d1eebc65bb0f18102", "ecb0b0a4a72192c5867dde73a3b39f4deeef438cf640dbd62eec94b699f0cdc6", "af692e0541d51f61f0953caeaf4b3304cf55657d3d7d26d1ccced110bcaee134", "ebde446c448c6981aa4ecaf2303bde6577960f2fcc2e9a3acc977b406f02c460", "58cf11e1094ac909c23e6b25e7267b7aafe50aa6da9990514d9170f6b72d9a8d", "6751c1c262427ae7794ac18cdeab081856046e6adb5bd0735bbd5297cd6427d9", "1d13417f796130633dc9b3a2caed6afabe11769af9d123ee8b2e398380578ebc", "49b99d6bd75317af7d133e71107e5771d6da4f6f8bafe7afbc21c45950a5f3a1", "21fb7cc33e98e02c72ce52507cd8c51725064e87625d9918191732341d124490", "042654ff4c4aeef1d9b008eba65c7fb5790b42600e4d53032da57920e5f2defd", "0468d76aa4389632eefffd6450219c560b91febea29c80b813bb356bc0b97ddc", "097a8aa4cb2cdb7163009d6d277af5142d197506b347efd1bd6e89a4789b2157", "768b6199f976a9a65f1620a61ae2383de76643485845c1b395cb8fec6807c466", "c15509d0e04dc0754e676995fb86b6790a02b68884199caf1b73cccc151a62a8", "ff61af5480fc514582142cf43d926276489402a6581bbe8deccd0d05292a3541", "7ffe1f889e6d533daca10b8ad1ff4adeb20f12af0873f428f5d3e39c9ffbf554", "5080e0ee74e56a5d28b9266a88d2a7bf2e0b8912770c372b61c98b4972ef9551", "3ec153001dfd704694632d64691936fe739133473b347ee06bd560303e6899e8", "29dd95b655efe4f5a4b0b948aadfd95f1cbc4602bc5561f98c8d3cf8e395b465"];
-var $=function(i){return document.getElementById(i)},dlg=$("pay"),body=document.body,unlocked=false;
-try{unlocked=localStorage.getItem("cn-unlocked")==="1"||localStorage.getItem("wda-unlocked")==="1"}catch(e){}
-function setU(){body.classList.add("unlocked");document.querySelectorAll("[data-quiz]").forEach(function(b){if(b._reset)b._reset()})}
-$("bank").textContent=CFG.bank;
-function open(c){dlg.showModal();if(c)$("code").focus()}
-$("nu").onclick=function(){if(!body.classList.contains("unlocked"))open(true)};
-document.addEventListener("click",function(e){var t=e.target.closest("[data-pay]");if(!t||body.classList.contains("unlocked"))return;e.preventDefault();open(false)});
-document.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches("li.lk")&&!body.classList.contains("unlocked")){e.preventDefault();open(false)}});
-document.addEventListener("click",function(e){var li=e.target.closest&&e.target.closest("li.lk");if(li&&!body.classList.contains("unlocked"))open(false)});
-$("px").onclick=function(){dlg.close()};dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
-function copy(t,b){var ok=function(){var o=b.textContent;b.textContent="Copied";setTimeout(function(){b.textContent=o},1500)};try{navigator.clipboard.writeText(t).then(ok,function(){})}catch(e){}}
-function msg(){var v=function(i){return $(i).value.trim()||"-"};
-var m="Hello, I have paid \u20a630,000 per month for CipherNext Intermediate and Advanced access.\nName: "+v("fn")+"\nEmail: "+v("em")+"\nPhone: "+v("ph")+"\nSending account name: "+v("sn")+"\nTransfer time or reference: "+v("rf")+"\nPlease confirm my payment and send my access code.";
-$("msg").value=m;
-if(CFG.whatsapp){$("wa").hidden=false;$("wa").href="https://wa.me/"+CFG.whatsapp.replace(/\D/g,"")+"?text="+encodeURIComponent(m)}
-if(CFG.email){$("ml").hidden=false;$("ml").href="mailto:"+CFG.email+"?subject="+encodeURIComponent("Payment confirmation")+"&body="+encodeURIComponent(m)}
-$("ct").textContent=(CFG.whatsapp||CFG.email)?"Send this message after you pay. We will confirm your payment and reply with your code.":"After you pay, copy this message and send it to the academy on WhatsApp or email."}
-["fn","em","ph","sn","rf"].forEach(function(i){$(i).addEventListener("input",msg)});msg();
-$("cm").onclick=function(){copy($("msg").value,$("cm"))};
-async function sha(s){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
-async function tryUnlock(){var er=$("er");er.textContent="";var c=$("code").value.trim().toUpperCase().replace(/\s+/g,"");
-if(!c){er.textContent="Enter your access code.";return}
-if(!(window.crypto&&crypto.subtle)){er.textContent="Open the live site (https) to enter your code.";return}
-var h=await sha("wda|"+c);
-if(H.indexOf(h)>-1){setU();try{localStorage.setItem("cn-unlocked","1")}catch(e){}window.cnRedeem&&window.cnRedeem(h);dlg.close()}
-else er.textContent="That code is not valid. Check it and try again, or contact us."}
-$("ub").onclick=tryUnlock;$("code").addEventListener("keydown",function(e){if(e.key==="Enter")tryUnlock()});
-if(unlocked)setU();
-window.cnUnlock=function(){if(!body.classList.contains("unlocked"))setU();try{localStorage.setItem("cn-unlocked","1")}catch(e){}};
-})();
-</script>
-<script>
-(function(){
-/* Supabase: paste your Project URL and anon public key (Project Settings > API). The anon key is safe to expose; row level security protects the data. */
-var SB={url:"https://netjhimavwjzniaiuaws.supabase.co",key:"sb_publishable_dAs7d9ugnzwSEjRo_jq1nw_LTt7G_qT"};
-var $=function(i){return document.getElementById(i)},dlg=$("auth"),sb=null,user=null,mode="signup",busy=false;
-if(SB.url&&SB.key&&window.supabase){sb=window.supabase.createClient(SB.url,SB.key,{auth:{persistSession:true,autoRefreshToken:true}})}
-function say(t,bad){var m=$("a-msg");m.textContent=t||"";m.style.color=bad?"#D64545":"var(--brand)"}
-function setMode(m){mode=m;var up=m==="signup";
-$("at").textContent=up?"Create your free account":"Welcome back";
-$("as").textContent=up?"Save your progress and points on any device.":"Log in to pick up where you left off.";
-$("a-name").classList.toggle("hidden",!up);$("a-forgot").classList.toggle("hidden",up);
-$("a-go").textContent=up?"Create account":"Log in";
-$("a-pass").autocomplete=up?"new-password":"current-password";
-["signup","login"].forEach(function(k){var t=$("tab-"+k),on=k===m;t.setAttribute("aria-selected",on);t.className="rounded-lg py-2 "+(on?"bg-card text-ink shadow-sm":"text-muted")});
-say("")}
-function openAuth(m){setMode(m);dlg.showModal();($(m==="signup"?"a-name":"a-email")).focus()}
-document.addEventListener("click",function(e){var t=e.target.closest("[data-auth]");if(!t)return;e.preventDefault();nvClose();openAuth(t.dataset.auth)});
-function nvClose(){var nv=$("nv");if(nv)nv.classList.add("hidden")}
-dlg.addEventListener("click",function(e){var t=e.target.closest("[data-tab]");if(t)return setMode(t.dataset.tab);if(e.target===dlg)dlg.close()});
-$("ax").onclick=function(){dlg.close()};
-function ui(){var on=!!user;
-$("su").classList.toggle("hidden",on);$("li").classList.toggle("sm:inline-block",!on);$("nli").classList.toggle("hidden",on);
-$("lo").classList.toggle("sm:inline-block",on);$("nlo").classList.toggle("hidden",!on);$("who").classList.toggle("sm:inline",on);
-$("hero-cta").classList.toggle("hidden",on);
-if(on){var n=user.user_metadata&&user.user_metadata.full_name;$("who").textContent=n||user.email}}
-function fail(err){say(err&&err.message?err.message:"Something went wrong. Try again.",true)}
-async function submit(){
-if(busy)return;
-if(!sb){say("Add your Supabase URL and anon key in SB at the bottom of this page first.",true);return}
-var em=$("a-email").value.trim(),pw=$("a-pass").value,nm=$("a-name").value.trim();
-if(!em||!pw){say("Enter your email and password.",true);return}
-if(mode==="signup"){if(!nm){say("Enter your full name.",true);return}if(pw.length<8){say("Use a password with at least 8 characters.",true);return}}
-busy=true;$("a-go").disabled=true;say("Please wait...");
-try{
-if(mode==="signup"){
-var r=await sb.auth.signUp({email:em,password:pw,options:{data:{full_name:nm},emailRedirectTo:location.origin+location.pathname}});
-if(r.error)throw r.error;
-if(r.data.session){dlg.close()}else{say("Check your email and click the confirmation link, then log in.")}
-}else{
-var l=await sb.auth.signInWithPassword({email:em,password:pw});
-if(l.error)throw l.error;dlg.close()}
-}catch(err){fail(err)}
-busy=false;$("a-go").disabled=false}
-$("a-go").onclick=submit;
-["a-name","a-email","a-pass"].forEach(function(i){$(i).addEventListener("keydown",function(e){if(e.key==="Enter")submit()})});
-$("a-forgot").onclick=async function(){
-if(!sb){say("Add your Supabase URL and anon key first.",true);return}
-var em=$("a-email").value.trim();if(!em){say("Enter your email above, then tap Forgot your password.",true);return}
-var r=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname});
-r.error?fail(r.error):say("Password reset link sent. Check your email.")};
-$("nlo").onclick=$("lo").onclick=async function(){
-if(sb)await sb.auth.signOut();
-try{localStorage.removeItem("cn-done");localStorage.removeItem("cn-unlocked")}catch(e){}
-location.reload()};
-/* progress sync */
-function mine(){return Object.keys(DONE).map(function(k){return{user_id:user.id,module_id:k}})}
-async function push(){if(!sb||!user)return;var rows=mine();if(!rows.length)return;
-await sb.from("module_progress").upsert(rows,{onConflict:"user_id,module_id",ignoreDuplicates:true})}
-var _sd=saveDone;saveDone=function(){_sd();push()};
-async function redeem(h){if(!sb||!user||!h)return;
-var r=await sb.rpc("redeem_access_code",{p_hash:h});
-if(!r.error&&r.data===true){try{localStorage.removeItem("cn-code")}catch(e){}}}
-window.cnRedeem=function(h){try{localStorage.setItem("cn-code",h)}catch(e){}redeem(h)};
-async function pull(){
-var r=await sb.from("module_progress").select("module_id");
-if(!r.error){(r.data||[]).forEach(function(x){DONE[x.module_id]=1});_sd();refresh();await push()}
-var p=await sb.from("profiles").select("is_unlocked").eq("id",user.id).maybeSingle();
-if(p.data&&p.data.is_unlocked){window.cnUnlock&&window.cnUnlock()}
-else{var h=null;try{h=localStorage.getItem("cn-code")}catch(e){}if(h)redeem(h)}}
-if(sb){sb.auth.onAuthStateChange(function(ev,session){
-var next=session?session.user:null,changed=(next&&next.id)!==(user&&user.id);user=next;ui();
-if(user&&changed)setTimeout(pull,0)})}
-ui();setMode("signup");
-})();
-</script>
-<script>
-(function(){
-var list=[["#top > h1",0],["#top > p",.1],["#hero-cta",.2],["#progress",.3],["#courses",0],["section.mt-12",0],["footer",0]];
-var els=[];
-list.forEach(function(x){document.querySelectorAll(x[0]).forEach(function(e){e.style.setProperty("--d",x[1]+"s");els.push(e)})});
-document.querySelectorAll("#bar > button").forEach(function(e,i){e.style.setProperty("--d",(i*.08)+"s");els.push(e)});
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.1,rootMargin:"0px 0px -5% 0px"});
-els.forEach(function(e){e.classList.add("fu");io.observe(e)});
-})();
-</script>
-</body>
-</html>
+</body></html>
