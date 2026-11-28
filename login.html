@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Log in | CipherNext Academy</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><meta name="theme-color" content="#3454EB">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']},colors:{brand:'#3454EB',navy:'#0F1B4D',gold:'#F6C85A',mist:'#F4F6FF',line:'#DCE1F2',muted:'#5A6488'}}}}</script>
+<style>.in{width:100%;border:1.5px solid #DCE1F2;border-radius:.85rem;padding:.8rem 1rem;background:#fff;outline:0;transition:.2s}.in:focus{border-color:#3454EB;box-shadow:0 0 0 4px rgba(52,84,235,.15)}
+@keyframes up{from{opacity:0;transform:translateY(20px)}}.up{animation:up .6s cubic-bezier(.2,.7,.2,1) backwards}@media(prefers-reduced-motion:reduce){.up{animation:none}}</style></head>
+<body class="min-h-screen bg-mist font-sans text-navy antialiased">
+<div class="grid min-h-screen lg:grid-cols-2">
+<aside class="relative hidden flex-col justify-between overflow-hidden bg-navy p-12 text-white lg:flex">
+<a href="index.html" class="flex items-center gap-3"><img src="logo-icon.png" alt="" width="44" height="44" class="h-11 w-11 rounded-xl"><span class="leading-none"><span class="block text-lg font-extrabold uppercase">CipherNext</span><span class="mt-1 block text-[.65rem] font-bold uppercase tracking-[.3em] text-gold">Academy</span></span></a>
+<div class="up"><h2 class="text-5xl font-extrabold leading-tight">Learn.<br>Build.<br><span class="text-gold">Grow.</span></h2><p class="mt-5 max-w-sm text-[#C9D1F5]">Quality tech education for the next generation of builders. Pick up exactly where you left off.</p>
+<ul class="mt-8 space-y-3 text-sm font-semibold"><li>✔ All Beginner courses are free</li><li>✔ Quiz after every module, earn points</li><li>✔ Progress synced on every device</li></ul></div>
+<p class="text-xs text-[#8EA3FF]">© 2026 CipherNext Academy</p>
+<span class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/40 blur-2xl"></span><span class="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-gold/20 blur-2xl"></span>
+</aside>
+
+<main class="flex items-center justify-center px-5 py-10">
+<div class="up w-full max-w-md">
+<a href="index.html" class="mb-8 flex items-center gap-2.5 lg:hidden"><img src="logo-icon.png" alt="" width="36" height="36" class="h-9 w-9 rounded-xl"><b class="uppercase">CipherNext</b></a>
+<div class="rounded-3xl border border-line bg-white p-7 shadow-xl shadow-navy/5 sm:p-9">
+<h1 id="t" class="text-2xl font-extrabold">Welcome back</h1><p id="s" class="mt-1 text-muted">Log in to pick up where you left off.</p>
+<div class="my-6 grid grid-cols-2 gap-1 rounded-xl bg-[#EBEEFB] p-1 text-sm font-bold" role="tablist"><button type="button" role="tab" data-m="login" class="rounded-lg py-2.5">Log in</button><button type="button" role="tab" data-m="signup" class="rounded-lg py-2.5">Sign up</button></div>
+<div class="grid gap-3.5">
+<input id="n" class="in" placeholder="Full name" autocomplete="name">
+<input id="e" class="in" type="email" placeholder="Email" autocomplete="email">
+<input id="p" class="in" type="password" placeholder="Password (8+ characters)" minlength="8" autocomplete="current-password">
+<button id="go" type="button" class="mt-1 rounded-xl bg-brand py-3.5 font-bold text-white shadow-lg shadow-brand/30 transition hover:bg-[#2840c4] disabled:opacity-60">Log in</button>
+</div>
+<p id="m" class="mt-4 min-h-[1.25rem] text-sm font-semibold" role="status"></p>
+<button id="f" type="button" class="text-sm font-semibold text-brand hover:underline">Forgot your password?</button>
+</div>
+<p class="mt-6 text-center text-sm text-muted"><a href="index.html" class="font-semibold hover:text-brand">← Back to home</a></p>
+</div></main></div>
+<script>
+(function(){
+var SB={url:"https://netjhimavwjzniaiuaws.supabase.co",key:"sb_publishable_dAs7d9ugnzwSEjRo_jq1nw_LTt7G_qT"};
+var NEXT="courses.html",$=function(i){return document.getElementById(i)},sb=window.supabase&&window.supabase.createClient(SB.url,SB.key,{auth:{persistSession:true,autoRefreshToken:true}}),mode="login",busy=false;
+function say(t,bad){$("m").textContent=t||"";$("m").style.color=bad?"#D64545":"#3454EB"}
+function setMode(m){mode=m;var up=m==="signup";$("n").style.display=up?"":"none";$("f").style.display=up?"none":"";
+$("t").textContent=up?"Create your free account":"Welcome back";$("s").textContent=up?"Save your progress and points on any device.":"Log in to pick up where you left off.";
+$("go").textContent=up?"Create account":"Log in";$("p").autocomplete=up?"new-password":"current-password";
+document.querySelectorAll("[data-m]").forEach(function(b){var on=b.dataset.m===m;b.setAttribute("aria-selected",on);b.className="rounded-lg py-2.5 "+(on?"bg-white text-navy shadow-sm":"text-muted")});say("")}
+document.querySelectorAll("[data-m]").forEach(function(b){b.onclick=function(){setMode(b.dataset.m)}});
+async function go(){if(busy)return;if(!sb){say("Could not load the sign-in service. Check your connection.",true);return}
+var em=$("e").value.trim(),pw=$("p").value,nm=$("n").value.trim();
+if(!em||!pw){say("Enter your email and password.",true);return}
+if(mode==="signup"){if(!nm){say("Enter your full name.",true);return}if(pw.length<8){say("Use a password with at least 8 characters.",true);return}}
+busy=true;$("go").disabled=true;say("Please wait...");
+try{var r;
+if(mode==="signup"){r=await sb.auth.signUp({email:em,password:pw,options:{data:{full_name:nm},emailRedirectTo:location.origin+location.pathname.replace(/[^\/]*$/,"")+NEXT}});if(r.error)throw r.error;
+if(r.data.session){location.href=NEXT;return}say("Check your email and click the confirmation link, then log in.")}
+else{r=await sb.auth.signInWithPassword({email:em,password:pw});if(r.error)throw r.error;location.href=NEXT;return}
+}catch(err){say(err&&err.message?err.message:"Something went wrong. Try again.",true)}
+busy=false;$("go").disabled=false}
+$("go").onclick=go;["n","e","p"].forEach(function(i){$(i).addEventListener("keydown",function(e){if(e.key==="Enter")go()})});
+$("f").onclick=async function(){if(!sb)return;var em=$("e").value.trim();if(!em){say("Enter your email above, then tap Forgot your password.",true);return}
+var r=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname});r.error?say(r.error.message,true):say("Password reset link sent. Check your email.")};
+if(sb)sb.auth.getSession().then(function(r){if(r.data.session)location.href=NEXT});
+setMode(new URLSearchParams(location.search).get("mode")==="signup"?"signup":"login");
+})();
+</script></body></html>
